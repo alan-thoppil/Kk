@@ -1072,30 +1072,110 @@
       max-width: 500px;
     }
 
-    /* Collage Puzzle Styles */
-    .collage-swap-tile {
+    /* Real Local Photo Collage Styles */
+    .real-collage-container {
       width: 100%;
-      height: 100%;
-      background-image: url('photo_collage.png');
-      background-size: 400% 400%;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-      position: relative;
-      user-select: none;
-      box-sizing: border-box;
-      border-radius: 3px;
+      max-width: 560px;
+      margin: 1rem auto;
     }
 
-    .collage-swap-tile:hover {
+    .real-collage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 12px;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: var(--radius-md);
+      border: 3px solid var(--accent-gold);
+      box-shadow: 0 20px 45px rgba(217, 119, 6, 0.3);
+    }
+
+    .real-collage-card {
+      position: relative;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .real-collage-card.main-portrait {
+      grid-column: span 2;
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+
+    .real-collage-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .real-collage-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .real-collage-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(15,23,42,0.9), transparent);
+      color: #FFFFFF;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.5rem 0.4rem 0.3rem 0.4rem;
+      text-align: center;
+    }
+
+    /* 6 Real Photo Swap Grid */
+    .real-photo-swap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 8px;
+      width: 100%;
+      max-width: 440px;
+      margin: 1.5rem auto 1rem auto;
+      padding: 10px;
+      background: #0F172A;
+      border-radius: var(--radius-md);
+      border: 3px solid rgba(217, 119, 6, 0.4);
+      box-shadow: 0 15px 35px rgba(217, 119, 6, 0.25);
+    }
+
+    .real-photo-tile {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      user-select: none;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .real-photo-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    .real-photo-tile:hover {
       transform: scale(0.96);
-      filter: brightness(1.1);
       z-index: 2;
     }
 
-    .collage-swap-tile.selected {
+    .real-photo-tile.selected {
       outline: 3.5px solid var(--accent-gold);
       outline-offset: -3.5px;
-      box-shadow: inset 0 0 20px rgba(217, 119, 6, 0.8), 0 0 15px rgba(217, 119, 6, 0.7);
+      box-shadow: 0 0 15px rgba(217, 119, 6, 0.8);
       z-index: 3;
       animation: pulseGold 0.8s infinite alternate;
     }
@@ -1518,17 +1598,10 @@
           </div>
         </div>
 
-        <div class="gallery-item" onclick="openLightbox('IMG-20260907-WA0056.jpg')">
-          <img src="IMG-20260907-WA0056.jpg" alt="Memory Snapshot 4" class="gallery-img" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('IMG-20260907-WA0060.jpg')">
+          <img src="IMG-20260907-WA0060.jpg" alt="Memory Snapshot 5" class="gallery-img" loading="lazy">
           <div class="gallery-overlay">
-            <span class="gallery-caption">Unforgettable Times 🌺</span>
-          </div>
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox('photo_collage.png')">
-          <img src="photo_collage.png" alt="Master Photo Collage" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-caption">Master Photo Collage 🖼️</span>
+            <span class="gallery-caption">Joyful Laughs 🎉</span>
           </div>
         </div>
       </div>
@@ -1539,10 +1612,10 @@
     <section class="section container" id="collage-puzzle">
       <div class="glass-card puzzle-card">
         <h2 class="section-title">Master Photo <span>Collage Puzzle</span> 🖼️</h2>
-        <p class="section-subtitle">Swap the 16 scrambled tiles to reveal the complete Master Birthday Photo Collage!</p>
+        <p class="section-subtitle">Click & swap the 6 scrambled photo tiles to assemble and unlock the Master Photo Collage!</p>
 
         <div class="swap-grid-wrapper" id="collage-grid-wrapper">
-          <div class="swap-grid" id="collage-grid"></div>
+          <div class="real-photo-swap-grid" id="collage-grid"></div>
         </div>
 
         <div class="puzzle-stats" id="collage-stats">
@@ -1557,15 +1630,40 @@
         </div>
 
         <div class="puzzle-solved-card" id="collage-solved-card">
-          <div class="solved-badge">🎉 Master Photo Collage Revealed!</div>
-          <div class="puzzle-solved-img-wrap" onclick="openLightbox('photo_collage.png')">
-            <img src="photo_collage.png" alt="Master Birthday Photo Collage" class="puzzle-solved-img">
-            <div class="gallery-overlay">
-              <span class="gallery-caption">Click to view full size 🔍</span>
+          <div class="solved-badge">🎉 Real Photo Memories Collage Unlocked!</div>
+          
+          <!-- Real Local Photo Collage Grid -->
+          <div class="real-collage-container">
+            <div class="real-collage-grid">
+              <div class="real-collage-card main-portrait" onclick="openLightbox('20250428_193019.jpg')">
+                <img src="20250428_193019.jpg" alt="Birthday Portrait">
+                <span class="real-collage-label">Birthday Portrait 💖</span>
+              </div>
+              <div class="real-collage-card" onclick="openLightbox('IMG-20250907-WA0013.jpg')">
+                <img src="IMG-20250907-WA0013.jpg" alt="Precious Moments">
+                <span class="real-collage-label">Precious Moments ✨</span>
+              </div>
+              <div class="real-collage-card" onclick="openLightbox('IMG-20250913-WA0029.jpg')">
+                <img src="IMG-20250913-WA0029.jpg" alt="Brightest Smiles">
+                <span class="real-collage-label">Brightest Smiles 😁</span>
+              </div>
+              <div class="real-collage-card" onclick="openLightbox('IMG-20250913-WA0031.jpg')">
+                <img src="IMG-20250913-WA0031.jpg" alt="Golden Days">
+                <span class="real-collage-label">Golden Days 🌟</span>
+              </div>
+              <div class="real-collage-card" onclick="openLightbox('IMG-20260907-WA0056.jpg')">
+                <img src="IMG-20260907-WA0056.jpg" alt="Unforgettable Times">
+                <span class="real-collage-label">Unforgettable Times 🌺</span>
+              </div>
+              <div class="real-collage-card" onclick="openLightbox('IMG-20260907-WA0060.jpg')">
+                <img src="IMG-20260907-WA0060.jpg" alt="Joyful Laughs">
+                <span class="real-collage-label">Joyful Laughs 🎉</span>
+              </div>
             </div>
           </div>
-          <p class="puzzle-solved-desc">"All our favorite moments & smiles together in one beautiful masterpiece." 💖📸</p>
-          <button type="button" class="btn btn-sm btn-secondary" onclick="shuffleCollagePuzzle()">🎮 Play Collage Puzzle Again</button>
+
+          <p class="puzzle-solved-desc">"All our favorite real moments & smiles combined into one beautiful collage." 💖📸</p>
+          <button type="button" class="btn btn-sm btn-secondary" onclick="shuffleCollagePuzzle()">🎮 Play Photo Puzzle Again</button>
         </div>
       </div>
     </section>
@@ -2084,36 +2182,34 @@
 
 
     /* ==========================================================================
-       GAME 3: MASTER PHOTO COLLAGE 4X4 TILE SWAP PUZZLE
+       GAME 3: REAL PHOTO COLLAGE SWAP PUZZLE
        ========================================================================== */
     (function() {
-      const GRID_SIZE = 4;
-      let tileOrder = Array.from({length: 16}, (_, i) => i);
+      const realPhotos = [
+        '20250428_193019.jpg',
+        'IMG-20250907-WA0013.jpg',
+        'IMG-20250913-WA0029.jpg',
+        'IMG-20250913-WA0031.jpg',
+        'IMG-20260907-WA0056.jpg',
+        'IMG-20260907-WA0060.jpg'
+      ];
+      let tileOrder = [0, 1, 2, 3, 4, 5];
       let selectedIdx = null;
       let moveCount = 0;
       let isSolved = false;
 
-      function getBgPos(tileId) {
-        const row = Math.floor(tileId / GRID_SIZE);
-        const col = tileId % GRID_SIZE;
-        const x = (col / (GRID_SIZE - 1)) * 100;
-        const y = (row / (GRID_SIZE - 1)) * 100;
-        return `${x}% ${y}%`;
-      }
-
       function renderGrid() {
         const gridEl = document.getElementById('collage-grid');
         if (!gridEl) return;
+        gridEl.className = 'real-photo-swap-grid';
         gridEl.innerHTML = '';
-        tileOrder.forEach((tileId, currentIdx) => {
+        tileOrder.forEach((photoIdx, currentIdx) => {
           const tile = document.createElement('div');
-          tile.className = 'collage-swap-tile';
+          tile.className = 'real-photo-tile';
           if (selectedIdx === currentIdx) {
             tile.classList.add('selected');
           }
-          tile.style.backgroundImage = "url('photo_collage.png')";
-          tile.style.backgroundSize = "400% 400%";
-          tile.style.backgroundPosition = getBgPos(tileId);
+          tile.innerHTML = `<img src="${realPhotos[photoIdx]}" alt="Photo Memory">`;
           tile.onclick = () => handleTileClick(currentIdx);
           gridEl.appendChild(tile);
         });
@@ -2202,7 +2298,7 @@
       }
 
       function autoSolve() {
-        tileOrder = Array.from({length: 16}, (_, i) => i);
+        tileOrder = [0, 1, 2, 3, 4, 5];
         selectedIdx = null;
         renderGrid();
         triggerSolved();
