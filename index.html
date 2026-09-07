@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gundumani's Birthday 🎉</title>
   
+  <!-- OpenGraph & Social Sharing Meta Tags -->
+  <meta property="og:title" content="Gundumani's Birthday 🎉">
+  <meta property="og:description" content="Celebrating Gundumani's birthday with memories, photos, and birthday wishes! ✨">
+  <meta property="og:image" content="20250428_193019.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,17 +22,17 @@
 
   <style>
     /* ==========================================================================
-       DESIGN SYSTEM & CSS VARIABLES
+       DESIGN SYSTEM & COLOR PALETTE (Midnight Rose Gold & Champagne)
        ========================================================================== */
     :root {
-      --bg-dark: #120A24;
-      --bg-card: #1A1033;
-      --bg-card-hover: #241747;
-      --accent-gold: #F4B942;
-      --accent-pink: #FF6F91;
-      --accent-teal: #5EC9C0;
-      --text-cream: #FFF6E9;
-      --text-muted: #B8B0D6;
+      --bg-dark: #0F0A1C;
+      --bg-card: #171026;
+      --bg-card-hover: #221838;
+      --accent-gold: #E0A96D;
+      --accent-pink: #F38181;
+      --accent-teal: #64DFDF;
+      --text-cream: #FDF8F2;
+      --text-muted: #C5B9D8;
       
       --font-heading: 'Playfair Display', Georgia, serif;
       --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -35,9 +42,9 @@
       --radius-md: 20px;
       --radius-lg: 28px;
       
-      --shadow-glow: 0 10px 30px rgba(244, 185, 66, 0.15);
-      --shadow-card: 0 15px 35px rgba(0, 0, 0, 0.4);
-      --border-glass: 1px solid rgba(255, 246, 233, 0.1);
+      --shadow-glow: 0 10px 30px rgba(224, 169, 109, 0.18);
+      --shadow-card: 0 15px 35px rgba(0, 0, 0, 0.45);
+      --border-glass: 1px solid rgba(253, 248, 242, 0.12);
     }
 
     /* Reset & Core Setup */
@@ -60,9 +67,9 @@
       overflow-x: hidden;
       min-height: 100vh;
       background-image: 
-        radial-gradient(circle at 15% 20%, rgba(255, 111, 145, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 70%, rgba(94, 201, 192, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(244, 185, 66, 0.05) 0%, transparent 60%);
+        radial-gradient(circle at 15% 20%, rgba(243, 129, 129, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 85% 70%, rgba(100, 223, 223, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(224, 169, 109, 0.08) 0%, transparent 60%);
       background-attachment: fixed;
     }
 
@@ -90,7 +97,7 @@
     }
 
     .glass-card {
-      background: rgba(26, 16, 51, 0.75);
+      background: rgba(23, 16, 38, 0.8);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: var(--border-glass);
@@ -124,8 +131,8 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      background: linear-gradient(135deg, var(--accent-gold), #E5A429);
-      color: #120A24;
+      background: linear-gradient(135deg, var(--accent-gold), #C88D52);
+      color: #0F0A1C;
       font-family: var(--font-body);
       font-weight: 600;
       font-size: 1rem;
@@ -135,12 +142,12 @@
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       text-decoration: none;
-      box-shadow: 0 4px 20px rgba(244, 185, 66, 0.3);
+      box-shadow: 0 4px 20px rgba(224, 169, 109, 0.35);
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(244, 185, 66, 0.45);
+      box-shadow: 0 8px 25px rgba(224, 169, 109, 0.5);
     }
 
     .btn:active {
@@ -154,7 +161,7 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: radial-gradient(circle at center, #1A1033 0%, #120A24 100%);
+      background: radial-gradient(circle at center, #171026 0%, #0F0A1C 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -173,7 +180,7 @@
       pointer-events: none;
     }
 
-    /* Falling Confetti Canvas/Container */
+    /* Falling Confetti Container */
     .confetti-container {
       position: absolute;
       inset: 0;
@@ -226,7 +233,7 @@
       color: var(--accent-gold);
       line-height: 1.2;
       margin-bottom: 1rem;
-      text-shadow: 0 0 25px rgba(244, 185, 66, 0.4);
+      text-shadow: 0 0 25px rgba(224, 169, 109, 0.4);
       animation: pulse-subtle 2s infinite ease-in-out;
     }
 
@@ -253,7 +260,7 @@
       font-size: clamp(6rem, 20vw, 12rem);
       font-weight: 700;
       color: var(--accent-pink);
-      text-shadow: 0 0 40px rgba(255, 111, 145, 0.6);
+      text-shadow: 0 0 40px rgba(243, 129, 129, 0.6);
       opacity: 0;
       pointer-events: none;
       z-index: 3;
@@ -305,7 +312,7 @@
       border-radius: 50%;
       padding: 8px;
       background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink), var(--accent-teal));
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(244, 185, 66, 0.25);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(224, 169, 109, 0.25);
       opacity: 0;
       transform: scale(0.85);
       transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
@@ -331,10 +338,10 @@
       font-size: 0.85rem;
       font-weight: 600;
       color: var(--accent-teal);
-      background: rgba(94, 201, 192, 0.12);
+      background: rgba(100, 223, 223, 0.12);
       padding: 0.4rem 1.2rem;
       border-radius: 50px;
-      border: 1px solid rgba(94, 201, 192, 0.3);
+      border: 1px solid rgba(100, 223, 223, 0.3);
     }
 
     .hero-headline {
@@ -390,8 +397,8 @@
     .message-card {
       text-align: center;
       position: relative;
-      background: linear-gradient(145deg, rgba(26, 16, 51, 0.85), rgba(18, 10, 36, 0.95));
-      border: 1px solid rgba(244, 185, 66, 0.2);
+      background: linear-gradient(145deg, rgba(23, 16, 38, 0.85), rgba(15, 10, 28, 0.95));
+      border: 1px solid rgba(224, 169, 109, 0.25);
     }
 
     .message-icon {
@@ -466,16 +473,16 @@
       border-radius: 50%;
       background: var(--bg-dark);
       border: 3px solid var(--accent-gold);
-      box-shadow: 0 0 15px rgba(244, 185, 66, 0.5);
+      box-shadow: 0 0 15px rgba(224, 169, 109, 0.5);
       z-index: 2;
     }
 
-    .timeline-item:nth-child(2) .timeline-dot { border-color: var(--accent-pink); box-shadow: 0 0 15px rgba(255, 111, 145, 0.5); }
-    .timeline-item:nth-child(3) .timeline-dot { border-color: var(--accent-teal); box-shadow: 0 0 15px rgba(94, 201, 192, 0.5); }
-    .timeline-item:nth-child(4) .timeline-dot { border-color: var(--accent-gold); box-shadow: 0 0 15px rgba(244, 185, 66, 0.5); }
+    .timeline-item:nth-child(2) .timeline-dot { border-color: var(--accent-pink); box-shadow: 0 0 15px rgba(243, 129, 129, 0.5); }
+    .timeline-item:nth-child(3) .timeline-dot { border-color: var(--accent-teal); box-shadow: 0 0 15px rgba(100, 223, 223, 0.5); }
+    .timeline-item:nth-child(4) .timeline-dot { border-color: var(--accent-gold); box-shadow: 0 0 15px rgba(224, 169, 109, 0.5); }
 
     .timeline-card {
-      background: rgba(26, 16, 51, 0.6);
+      background: rgba(23, 16, 38, 0.65);
       border: var(--border-glass);
       border-radius: var(--radius-md);
       padding: 1.5rem 1.8rem;
@@ -484,7 +491,7 @@
 
     .timeline-card:hover {
       transform: translateX(5px);
-      border-color: rgba(244, 185, 66, 0.3);
+      border-color: rgba(224, 169, 109, 0.35);
     }
 
     .timeline-badge {
@@ -537,7 +544,7 @@
       overflow: hidden;
       aspect-ratio: 4 / 5;
       border: var(--border-glass);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
       cursor: pointer;
       background: var(--bg-card);
       transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
@@ -545,8 +552,8 @@
 
     .gallery-item:hover {
       transform: translateY(-6px);
-      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 111, 145, 0.2);
-      border-color: rgba(255, 111, 145, 0.4);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(243, 129, 129, 0.25);
+      border-color: rgba(243, 129, 129, 0.45);
     }
 
     .gallery-img {
@@ -563,7 +570,7 @@
     .gallery-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(18, 10, 36, 0.7) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(15, 10, 28, 0.75) 0%, transparent 60%);
       opacity: 0;
       transition: opacity 0.3s ease;
       display: flex;
@@ -586,7 +593,7 @@
       position: fixed;
       inset: 0;
       z-index: 10000;
-      background: rgba(10, 5, 20, 0.92);
+      background: rgba(10, 5, 18, 0.93);
       backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
@@ -606,7 +613,7 @@
       max-width: 90vw;
       max-height: 85vh;
       border-radius: var(--radius-md);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.85);
       object-fit: contain;
     }
 
@@ -629,7 +636,7 @@
     }
 
     .lightbox-close:hover {
-      background: rgba(255, 111, 145, 0.8);
+      background: rgba(243, 129, 129, 0.85);
     }
 
     /* ==========================================================================
@@ -671,7 +678,7 @@
 
     .audio-player-wrapper {
       width: 100%;
-      background: rgba(18, 10, 36, 0.7);
+      background: rgba(15, 10, 28, 0.75);
       padding: 1.2rem;
       border-radius: var(--radius-md);
       border: var(--border-glass);
@@ -681,7 +688,7 @@
       width: 100%;
       height: 44px;
       outline: none;
-      filter: invert(0.9) hue-rotate(220deg);
+      filter: invert(0.9) hue-rotate(190deg);
     }
 
     .music-note-embed {
@@ -734,8 +741,8 @@
       bottom: 2rem;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: linear-gradient(135deg, var(--accent-teal), #3B9E96);
-      color: #120A24;
+      background: linear-gradient(135deg, var(--accent-teal), #38A3A3);
+      color: #0F0A1C;
       font-weight: 600;
       padding: 0.8rem 1.6rem;
       border-radius: 50px;
@@ -758,7 +765,7 @@
       text-align: center;
       border-top: var(--border-glass);
       margin-top: 3rem;
-      background: rgba(18, 10, 36, 0.5);
+      background: rgba(15, 10, 28, 0.5);
     }
 
     .footer-closing {
@@ -1076,13 +1083,6 @@
       const introSplash = document.getElementById('intro-splash');
       const heroPhotoFrame = document.getElementById('hero-photo-frame');
 
-      // Timeline:
-      // T = 0ms: Greeting text visible + Confetti falling
-      // T = 5000ms: Greeting text disappears (5 seconds exact)
-      // T = 5200ms -> 7300ms: Countdown 3 -> 2 -> 1 (~700ms apart)
-      // T = 7400ms: Splash screen fades out
-      // T = 7600ms: Reveal Hero photo frame
-
       setTimeout(() => {
         // Step 1: Hide Greeting Text at exactly 5 seconds
         splashGreeting.classList.add('hidden');
@@ -1098,11 +1098,10 @@
             if (idx < numbers.length) {
               splashCountdown.textContent = numbers[idx];
               splashCountdown.classList.remove('pop-in');
-              // Force reflow for re-triggering animation
               void splashCountdown.offsetWidth;
               splashCountdown.classList.add('pop-in');
               idx++;
-              setTimeout(showNextNumber, 700); // 700ms apart
+              setTimeout(showNextNumber, 700);
             } else {
               // Step 3: Countdown Finished -> Fade out splash screen
               splashCountdown.style.opacity = '0';
@@ -1121,7 +1120,7 @@
           showNextNumber();
         }, 200);
 
-      }, 5000); // EXACT 5-SECOND INTRO DELAY
+      }, 5000);
 
 
       // ----------------------------------------------------------------------
@@ -1134,7 +1133,7 @@
             text: window.location.href || 'https://gundumani-birthday.com',
             width: 160,
             height: 160,
-            colorDark : "#1A1033",
+            colorDark : "#171026",
             colorLight : "#FFFFFF",
             correctLevel : QRCode.CorrectLevel.H
           });
@@ -1152,7 +1151,6 @@
       navigator.clipboard.writeText(url).then(() => {
         showToast('Link copied to clipboard! 🎉');
       }).catch(() => {
-        // Fallback for older browsers
         const tempInput = document.createElement('input');
         tempInput.value = url;
         document.body.appendChild(tempInput);
