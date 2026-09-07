@@ -943,7 +943,7 @@
       animation: pulseGold 0.8s infinite alternate;
     }
 
-    /* 3x3 Tile Swap Puzzle Styles */
+    /* 4x4 Tile Swap Puzzle Styles */
     .swap-grid-wrapper {
       position: relative;
       width: 100%;
@@ -959,25 +959,25 @@
 
     .swap-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
       width: 100%;
       height: 100%;
-      gap: 3px;
+      gap: 2px;
       background: rgba(217, 119, 6, 0.3);
     }
 
     .swap-tile {
       width: 100%;
       height: 100%;
-      background-image: url('chatgpt_oil_painting.png');
-      background-size: 300% 300%;
+      background-image: url('ChatGPT Image Sep 7, 2026, 11_30_43 PM.png');
+      background-size: 400% 400%;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
       position: relative;
       user-select: none;
       box-sizing: border-box;
-      border-radius: 4px;
+      border-radius: 3px;
     }
 
     .swap-tile:hover {
@@ -1242,10 +1242,10 @@
           </div>
         </div>
 
-        <!-- GAME 2: AI OIL PAINTING 3X3 TILE SWAP PUZZLE -->
+        <!-- GAME 2: AI OIL PAINTING 4X4 TILE SWAP PUZZLE -->
         <div class="glass-card puzzle-card">
-          <h3 class="timeline-title" style="font-size: 1.6rem; color: var(--accent-gold);">Game 2: AI Oil Painting Swap Puzzle 🎨</h3>
-          <p class="section-subtitle" style="margin-bottom: 0.5rem;">Click tile 1 (gold highlight) then click tile 2 to swap & assemble the 3x3 oil painting!</p>
+          <h3 class="timeline-title" style="font-size: 1.6rem; color: var(--accent-gold);">Game 2: AI Oil Painting Swap Puzzle 🎨 (16 Pieces)</h3>
+          <p class="section-subtitle" style="margin-bottom: 0.5rem;">Click tile 1 (gold highlight) then click tile 2 to swap & assemble the 4x4 oil painting!</p>
 
           <div class="swap-grid-wrapper" id="tile-grid-wrapper">
             <div class="swap-grid" id="tile-grid"></div>
@@ -1264,8 +1264,8 @@
 
           <div class="puzzle-solved-card" id="tile-solved-card">
             <div class="solved-badge">🎉 Puzzle Solved! AI Talking Memory Oil Painting Unlocked</div>
-            <div class="puzzle-solved-img-wrap" onclick="openLightbox('chatgpt_oil_painting.png')">
-              <img src="chatgpt_oil_painting.png" alt="ChatGPT AI Talking Memory Oil Painting Artwork" class="puzzle-solved-img">
+            <div class="puzzle-solved-img-wrap" onclick="openLightbox('ChatGPT Image Sep 7, 2026, 11_30_43 PM.png')">
+              <img src="ChatGPT Image Sep 7, 2026, 11_30_43 PM.png" alt="ChatGPT AI Talking Memory Oil Painting Artwork 2" class="puzzle-solved-img">
               <div class="gallery-overlay">
                 <span class="gallery-caption">Click to view full size 🔍</span>
               </div>
@@ -1681,18 +1681,21 @@
 
 
     /* ==========================================================================
-       GAME 2: 3X3 TILE SWAP PUZZLE
+       GAME 2: 4X4 TILE SWAP PUZZLE (ChatGPT Image Sep 7, 2026, 11_30_43 PM)
        ========================================================================== */
     (function() {
-      let tileOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+      const GRID_SIZE = 4;
+      let tileOrder = Array.from({length: 16}, (_, i) => i);
       let selectedIdx = null;
       let moveCount = 0;
       let isSolved = false;
 
       function getBgPos(tileId) {
-        const row = Math.floor(tileId / 3);
-        const col = tileId % 3;
-        return `${col * 50}% ${row * 50}%`;
+        const row = Math.floor(tileId / GRID_SIZE);
+        const col = tileId % GRID_SIZE;
+        const x = (col / (GRID_SIZE - 1)) * 100;
+        const y = (row / (GRID_SIZE - 1)) * 100;
+        return `${x}% ${y}%`;
       }
 
       function renderGrid() {
@@ -1705,8 +1708,8 @@
           if (selectedIdx === currentIdx) {
             tile.classList.add('selected');
           }
-          tile.style.backgroundImage = "url('chatgpt_oil_painting.png')";
-          tile.style.backgroundSize = "300% 300%";
+          tile.style.backgroundImage = "url('ChatGPT Image Sep 7, 2026, 11_30_43 PM.png')";
+          tile.style.backgroundSize = "400% 400%";
           tile.style.backgroundPosition = getBgPos(tileId);
           tile.onclick = () => handleTileClick(currentIdx);
           gridEl.appendChild(tile);
@@ -1796,7 +1799,7 @@
       }
 
       function autoSolve() {
-        tileOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        tileOrder = Array.from({length: 16}, (_, i) => i);
         selectedIdx = null;
         renderGrid();
         triggerSolved();
