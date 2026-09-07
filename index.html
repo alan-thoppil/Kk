@@ -1487,44 +1487,12 @@
     </section>
 
 
-    <!-- 4.5. MYSTERY PUZZLES SECTION (FEATURING CARD VAULT & 3X3 PICTURE TILE SWAP) -->
+    <!-- 4.5. MYSTERY PUZZLES SECTION (FEATURING 3X3 PICTURE TILE SWAP) -->
     <section class="section container" id="puzzle">
-      <h2 class="section-title">Birthday <span>Fun & Puzzles</span> 🧩</h2>
-      <p class="section-subtitle">Play these fun mini-games to reveal the hidden AI Oil Painting artwork!</p>
+      <h2 class="section-title">Birthday <span>Oil Painting Puzzle</span> 🧩</h2>
+      <p class="section-subtitle">Play this fun mini-game to reveal the hidden AI Oil Painting artwork!</p>
 
       <div class="puzzles-wrapper">
-        
-        <!-- GAME 1: SECRET BIRTHDAY VAULT (MEMORY CARD MATCH) -->
-        <div class="glass-card puzzle-card">
-          <h3 class="timeline-title" style="font-size: 1.6rem; color: var(--accent-gold);">Game 1: Secret Birthday Vault 🔐</h3>
-          <p class="section-subtitle" style="margin-bottom: 0.5rem;">Flip & match 3 pairs of cards to unlock the secret gift!</p>
-
-          <div class="puzzle-grid-wrapper">
-            <div class="memory-grid" id="memory-grid"></div>
-          </div>
-
-          <div class="puzzle-stats" id="vault-stats">
-            <span>Flips: <strong id="vault-moves" style="color: var(--accent-gold);">0</strong></span>
-            <span style="margin: 0 10px; opacity: 0.4;">|</span>
-            <span>Status: <strong id="vault-status" style="color: var(--accent-teal);">Locked 🔒</strong></span>
-          </div>
-
-          <div class="puzzle-controls" id="vault-controls">
-            <button type="button" class="btn btn-sm btn-secondary" onclick="shuffleVaultGame()">🔄 Shuffle Cards</button>
-          </div>
-
-          <div class="puzzle-solved-card" id="vault-solved-card">
-            <div class="solved-badge">🎉 Vault Unlocked! AI Talking Memory Oil Painting Revealed</div>
-            <div class="puzzle-solved-img-wrap" onclick="openLightbox('chatgpt_oil_painting.png')">
-              <img src="chatgpt_oil_painting.png" alt="ChatGPT AI Talking Memory Oil Painting Artwork" class="puzzle-solved-img">
-              <div class="gallery-overlay">
-                <span class="gallery-caption">Click to view full size 🔍</span>
-              </div>
-            </div>
-            <p class="puzzle-solved-desc">"Promised tea. Delivered excuses. Every. Single. Time." ☕🫖✨</p>
-            <button type="button" class="btn btn-sm btn-secondary" onclick="shuffleVaultGame()">🎮 Play Vault Again</button>
-          </div>
-        </div>
 
         <!-- GAME 2: AI OIL PAINTING 4X4 TILE SWAP PUZZLE -->
         <div class="glass-card puzzle-card">
@@ -1662,6 +1630,41 @@
           <button id="copy-btn" class="btn" onclick="copyPageLink()">
             📋 Copy Page Link
           </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 7.4. SECRET BIRTHDAY VAULT PUZZLE SECTION (JUST BEFORE GIFT SECTION) -->
+    <section class="section container" id="vault-puzzle">
+      <div class="glass-card puzzle-card">
+        <h2 class="section-title">Secret Birthday <span>Vault</span> 🔐</h2>
+        <p class="section-subtitle" style="margin-bottom: 1.5rem;">Flip & match 3 pairs of cards to unlock the secret gift!</p>
+
+        <div class="puzzle-grid-wrapper">
+          <div class="memory-grid" id="memory-grid"></div>
+        </div>
+
+        <div class="puzzle-stats" id="vault-stats">
+          <span>Flips: <strong id="vault-moves" style="color: var(--accent-gold);">0</strong></span>
+          <span style="margin: 0 10px; opacity: 0.4;">|</span>
+          <span>Status: <strong id="vault-status" style="color: var(--accent-teal);">Locked 🔒</strong></span>
+        </div>
+
+        <div class="puzzle-controls" id="vault-controls">
+          <button type="button" class="btn btn-sm btn-secondary" onclick="shuffleVaultGame()">🔄 Shuffle Cards</button>
+        </div>
+
+        <div class="puzzle-solved-card" id="vault-solved-card">
+          <div class="solved-badge">🎉 Vault Unlocked! Secret Message Revealed</div>
+          <div class="puzzle-solved-img-wrap" onclick="openLightbox('chatgpt_oil_painting.png')">
+            <img src="chatgpt_oil_painting.png" alt="ChatGPT AI Talking Memory Oil Painting Artwork" class="puzzle-solved-img">
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Click to view full size 🔍</span>
+            </div>
+          </div>
+          <p class="puzzle-solved-desc">"Promised tea. Delivered excuses. Every. Single. Time." ☕🫖✨</p>
+          <button type="button" class="btn btn-sm btn-secondary" onclick="shuffleVaultGame()">🎮 Play Vault Again</button>
         </div>
       </div>
     </section>
