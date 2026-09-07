@@ -876,6 +876,144 @@
         display: none !important;
       }
     }
+
+    /* ==========================================================================
+       MYSTERY ARTWORK PUZZLE SECTION STYLES
+       ========================================================================== */
+    .puzzle-card {
+      text-align: center;
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .puzzle-grid-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 1 / 1;
+      margin: 1.5rem auto 1rem auto;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(217, 119, 6, 0.2);
+      border: 3px solid rgba(217, 119, 6, 0.4);
+      background: #0F172A;
+    }
+
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      width: 100%;
+      height: 100%;
+      gap: 3px;
+      background: rgba(217, 119, 6, 0.3);
+    }
+
+    .puzzle-tile {
+      width: 100%;
+      height: 100%;
+      background-image: url('chatgpt_oil_painting.png');
+      background-size: 300% 300%;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      position: relative;
+      user-select: none;
+      box-sizing: border-box;
+      border-radius: 4px;
+    }
+
+    .puzzle-tile:hover {
+      transform: scale(0.96);
+      filter: brightness(1.1);
+      z-index: 2;
+    }
+
+    .puzzle-tile.selected {
+      outline: 3.5px solid var(--accent-gold);
+      outline-offset: -3.5px;
+      box-shadow: inset 0 0 20px rgba(217, 119, 6, 0.8), 0 0 15px rgba(217, 119, 6, 0.7);
+      z-index: 3;
+      animation: pulseGold 0.8s infinite alternate;
+    }
+
+    @keyframes pulseGold {
+      0% { outline-color: var(--accent-gold); }
+      100% { outline-color: var(--accent-pink); }
+    }
+
+    .puzzle-stats {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .puzzle-controls {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .solved-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink));
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.5rem 1.4rem;
+      border-radius: 50px;
+      box-shadow: 0 6px 20px rgba(225, 29, 72, 0.25);
+    }
+
+    .puzzle-solved-card {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      margin-top: 1rem;
+      animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .puzzle-solved-card.active {
+      display: flex;
+    }
+
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.92); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .puzzle-solved-img-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(217, 119, 6, 0.3);
+      border: 3px solid var(--accent-gold);
+      cursor: pointer;
+    }
+
+    .puzzle-solved-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .puzzle-solved-img-wrap:hover .puzzle-solved-img {
+      transform: scale(1.03);
+    }
+
+    .puzzle-solved-desc {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: var(--text-cream);
+      font-style: italic;
+      max-width: 500px;
+    }
   </style>
 </head>
 <body>
@@ -1003,6 +1141,50 @@
               Stepping into today with excitement for all the beautiful chapters yet to be written in your journey ahead!
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 4.5. MYSTERY ARTWORK PUZZLE SECTION -->
+    <section class="section container" id="puzzle">
+      <div class="glass-card puzzle-card">
+        <h2 class="section-title">Secret Artwork <span>Puzzle</span> 🧩</h2>
+        <p class="section-subtitle">Click & swap any two scrambled tiles to assemble the hidden AI Memory Oil Painting!</p>
+
+        <!-- Puzzle Game Container -->
+        <div class="puzzle-grid-wrapper" id="puzzle-grid-wrapper">
+          <div class="puzzle-grid" id="puzzle-grid"></div>
+        </div>
+
+        <div class="puzzle-stats" id="puzzle-stats">
+          <span>Moves: <strong id="puzzle-moves" style="color: var(--accent-gold);">0</strong></span>
+          <span style="margin: 0 10px; opacity: 0.4;">|</span>
+          <span>Status: <strong id="puzzle-status" style="color: var(--accent-teal);">Scrambled 🧩</strong></span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="puzzle-controls" id="puzzle-controls">
+          <button type="button" class="btn btn-sm btn-secondary" onclick="shufflePuzzle()">🔄 Reshuffle</button>
+          <button type="button" class="btn btn-sm" onclick="autoSolvePuzzle()">✨ Auto Solve & Reveal</button>
+        </div>
+
+        <!-- Solved Reward Card (Appears upon solving puzzle) -->
+        <div class="puzzle-solved-card" id="puzzle-solved-card">
+          <div class="solved-badge">🎉 Puzzle Solved! AI Talking Memory Oil Painting Revealed</div>
+          
+          <div class="puzzle-solved-img-wrap" onclick="openLightbox('chatgpt_oil_painting.png')">
+            <img src="chatgpt_oil_painting.png" alt="ChatGPT AI Talking Memory Oil Painting Artwork" class="puzzle-solved-img">
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Click to view full size 🔍</span>
+            </div>
+          </div>
+
+          <p class="puzzle-solved-desc">
+            "A specially rendered talking oil painting capturing our favorite memories together." 🎨✨
+          </p>
+
+          <button type="button" class="btn btn-sm btn-secondary" onclick="shufflePuzzle()" style="margin-top: 0.5rem;">🎮 Play Puzzle Again</button>
         </div>
       </div>
     </section>
@@ -1293,6 +1475,136 @@
         lightbox.classList.remove('active');
       }
     }
+
+    /* ==========================================================================
+       PUZZLE GAME SCRIPT (SWAP TILES TO REVEAL CHATGPT OIL PAINTING ARTWORK)
+       ========================================================================== */
+    (function() {
+      let tileOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+      let selectedIdx = null;
+      let moveCount = 0;
+      let isSolved = false;
+
+      function getBgPos(tileId) {
+        const row = Math.floor(tileId / 3);
+        const col = tileId % 3;
+        return `${col * 50}% ${row * 50}%`;
+      }
+
+      function renderGrid() {
+        const gridEl = document.getElementById('puzzle-grid');
+        if (!gridEl) return;
+        gridEl.innerHTML = '';
+        tileOrder.forEach((tileId, currentIdx) => {
+          const tile = document.createElement('div');
+          tile.className = 'puzzle-tile';
+          if (selectedIdx === currentIdx) {
+            tile.classList.add('selected');
+          }
+          tile.style.backgroundImage = "url('chatgpt_oil_painting.png')";
+          tile.style.backgroundSize = "300% 300%";
+          tile.style.backgroundPosition = getBgPos(tileId);
+          tile.onclick = () => handleTileClick(currentIdx);
+          gridEl.appendChild(tile);
+        });
+      }
+
+      function handleTileClick(clickedIdx) {
+        if (isSolved) return;
+
+        if (selectedIdx === null) {
+          selectedIdx = clickedIdx;
+          renderGrid();
+        } else if (selectedIdx === clickedIdx) {
+          selectedIdx = null;
+          renderGrid();
+        } else {
+          // Swap tiles
+          const temp = tileOrder[selectedIdx];
+          tileOrder[selectedIdx] = tileOrder[clickedIdx];
+          tileOrder[clickedIdx] = temp;
+          
+          selectedIdx = null;
+          moveCount++;
+          const movesEl = document.getElementById('puzzle-moves');
+          if (movesEl) movesEl.textContent = moveCount;
+          renderGrid();
+
+          checkSolved();
+        }
+      }
+
+      function checkSolved() {
+        const solved = tileOrder.every((val, idx) => val === idx);
+        if (solved) {
+          triggerSolved();
+        }
+      }
+
+      function triggerSolved() {
+        isSolved = true;
+        const statusEl = document.getElementById('puzzle-status');
+        if (statusEl) statusEl.textContent = '🎉 Solved!';
+        
+        // Confetti burst
+        if (typeof startConfetti === 'function') {
+          startConfetti();
+        }
+
+        const puzzleWrapper = document.getElementById('puzzle-grid-wrapper');
+        const puzzleControls = document.getElementById('puzzle-controls');
+        const puzzleStats = document.getElementById('puzzle-stats');
+        const solvedCard = document.getElementById('puzzle-solved-card');
+
+        setTimeout(() => {
+          if (puzzleWrapper) puzzleWrapper.style.display = 'none';
+          if (puzzleControls) puzzleControls.style.display = 'none';
+          if (puzzleStats) puzzleStats.style.display = 'none';
+          if (solvedCard) solvedCard.classList.add('active');
+        }, 400);
+      }
+
+      function shuffleGrid() {
+        isSolved = false;
+        selectedIdx = null;
+        moveCount = 0;
+        const movesEl = document.getElementById('puzzle-moves');
+        const statusEl = document.getElementById('puzzle-status');
+        const puzzleWrapper = document.getElementById('puzzle-grid-wrapper');
+        const puzzleControls = document.getElementById('puzzle-controls');
+        const puzzleStats = document.getElementById('puzzle-stats');
+        const solvedCard = document.getElementById('puzzle-solved-card');
+
+        if (movesEl) movesEl.textContent = moveCount;
+        if (statusEl) statusEl.textContent = 'Scrambled 🧩';
+        if (puzzleWrapper) puzzleWrapper.style.display = 'block';
+        if (puzzleControls) puzzleControls.style.display = 'flex';
+        if (puzzleStats) puzzleStats.style.display = 'block';
+        if (solvedCard) solvedCard.classList.remove('active');
+
+        // Scramble array ensuring it's not accidentally solved
+        do {
+          for (let i = tileOrder.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [tileOrder[i], tileOrder[j]] = [tileOrder[j], tileOrder[i]];
+          }
+        } while (tileOrder.every((val, idx) => val === idx));
+
+        renderGrid();
+      }
+
+      function autoSolve() {
+        tileOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        selectedIdx = null;
+        renderGrid();
+        triggerSolved();
+      }
+
+      window.shufflePuzzle = shuffleGrid;
+      window.autoSolvePuzzle = autoSolve;
+
+      document.addEventListener('DOMContentLoaded', shuffleGrid);
+    })();
   </script>
 </body>
 </html>
