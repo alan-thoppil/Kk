@@ -284,7 +284,7 @@
     }
 
     /* ==========================================================================
-       2. HERO SECTION (2-COLUMN LAYOUT: TEXT LEFT, FULL IMAGE RIGHT)
+       2. HERO SECTION (SQUARE PHOTO SEPARATION, NO BACKGROUND CARD CONTAINER)
        ========================================================================== */
     .hero-section {
       min-height: 90vh;
@@ -356,15 +356,18 @@
       width: 100%;
     }
 
-    /* Full Card Hero Image Frame */
+    /* Square Hero Photo Frame without Heavy Background Container */
     .hero-photo-card {
       position: relative;
       width: 100%;
-      border-radius: 28px;
+      max-width: 440px;
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12), 0 0 35px rgba(217, 119, 6, 0.15);
-      background: #FFFFFF;
+      border: 2px solid rgba(217, 119, 6, 0.3);
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1), 0 0 30px rgba(217, 119, 6, 0.12);
+      background: transparent;
+      margin: 0 auto;
       opacity: 0;
       transform: translateY(20px) scale(0.95);
       transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
@@ -377,7 +380,7 @@
 
     .hero-card-img {
       width: 100%;
-      height: clamp(380px, 50vh, 520px);
+      height: 100%;
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
@@ -901,7 +904,7 @@
        ========================================================================== -->
   <main id="main-content">
 
-    <!-- 2. HERO SECTION (FULL IMAGE 20250428_193019.jpg ON RIGHT) -->
+    <!-- 2. HERO SECTION (SQUARE PHOTO SEPARATION, NO BACKGROUND CARD CONTAINER) -->
     <section class="hero-section container" id="hero">
       <div class="hero-grid">
         <!-- Left Column: Text Content -->
@@ -918,7 +921,7 @@
           </a>
         </div>
 
-        <!-- Right Column: Full Image 20250428_193019.jpg -->
+        <!-- Right Column: Crisp Square Photo Frame (20250428_193019.jpg) -->
         <div class="hero-image-col">
           <div class="hero-photo-card" id="hero-photo-frame">
             <img src="20250428_193019.jpg" alt="Gundumani Birthday Portrait" class="hero-card-img" id="hero-img">
