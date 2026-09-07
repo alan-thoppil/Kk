@@ -1071,6 +1071,210 @@
       font-style: italic;
       max-width: 500px;
     }
+
+    /* Collage Puzzle Styles */
+    .collage-swap-tile {
+      width: 100%;
+      height: 100%;
+      background-image: url('photo_collage.png');
+      background-size: 400% 400%;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      position: relative;
+      user-select: none;
+      box-sizing: border-box;
+      border-radius: 3px;
+    }
+
+    .collage-swap-tile:hover {
+      transform: scale(0.96);
+      filter: brightness(1.1);
+      z-index: 2;
+    }
+
+    .collage-swap-tile.selected {
+      outline: 3.5px solid var(--accent-gold);
+      outline-offset: -3.5px;
+      box-shadow: inset 0 0 20px rgba(217, 119, 6, 0.8), 0 0 15px rgba(217, 119, 6, 0.7);
+      z-index: 3;
+      animation: pulseGold 0.8s infinite alternate;
+    }
+
+    /* Prank Gift Box Section Styles */
+    .gift-box-card {
+      text-align: center;
+      position: relative;
+      max-width: 580px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(254,243,199,0.9));
+      border: 2px solid var(--accent-gold);
+    }
+
+    .gift-box-icon-wrap {
+      font-size: 5.5rem;
+      margin: 1rem 0;
+      cursor: pointer;
+      display: inline-block;
+      user-select: none;
+      animation: giftBounce 1.5s infinite alternate ease-in-out;
+      transition: transform 0.3s ease;
+    }
+
+    .gift-box-icon-wrap:hover {
+      transform: scale(1.15) rotate(6deg);
+    }
+
+    @keyframes giftBounce {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(-5deg); }
+      100% { transform: translateY(-6px) rotate(5deg); }
+    }
+
+    /* Prank Overlay Modal */
+    .prank-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10005;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .prank-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .prank-modal-content {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      border: 3px solid var(--accent-gold);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+      transform: scale(0.85);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .prank-modal.active .prank-modal-content {
+      transform: scale(1);
+    }
+
+    .prank-emoji {
+      font-size: 4rem;
+      margin-bottom: 0.5rem;
+      animation: spinEmoji 2s infinite ease-in-out;
+    }
+
+    @keyframes spinEmoji {
+      0%, 100% { transform: rotate(-10deg) scale(1); }
+      50% { transform: rotate(10deg) scale(1.1); }
+    }
+
+    .prank-title {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      color: var(--accent-pink);
+      margin-bottom: 0.8rem;
+    }
+
+    .prank-text {
+      font-size: 1.05rem;
+      color: var(--text-cream);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVENESS & TOUCH OPTIMIZATION (< 600px & < 480px)
+       ========================================================================== */
+    @media (max-width: 600px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .glass-card {
+        padding: 1.5rem 1.25rem;
+        border-radius: var(--radius-md);
+      }
+
+      .section-title {
+        font-size: clamp(1.75rem, 6vw, 2.2rem);
+      }
+
+      .section-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+      }
+
+      /* Mobile Hero Section */
+      .hero-section {
+        padding: 2rem 0 1.5rem 0;
+        min-height: auto;
+      }
+
+      .hero-bg-wrapper {
+        height: 360px !important;
+        border-radius: var(--radius-md);
+      }
+
+      .hero-text-col {
+        padding: 1.75rem 1.25rem;
+        border-radius: var(--radius-md);
+      }
+
+      .hero-headline {
+        font-size: clamp(2.4rem, 8.5vw, 3.5rem);
+      }
+
+      /* Touch Friendly Puzzle Grids on Mobile */
+      .swap-grid-wrapper {
+        max-width: 330px !important;
+        border-width: 2px;
+      }
+
+      .memory-grid {
+        max-width: 310px !important;
+        gap: 8px;
+      }
+
+      .memory-card-item {
+        font-size: 2rem;
+        border-radius: 12px;
+        touch-action: manipulation;
+      }
+
+      .swap-tile, .collage-swap-tile, .btn, .memory-card-item {
+        touch-action: manipulation;
+      }
+
+      /* Prank Gift Modal on Mobile */
+      .prank-modal-content {
+        padding: 1.75rem 1.25rem;
+        border-radius: var(--radius-md);
+      }
+
+      .prank-emoji {
+        font-size: 3rem;
+      }
+
+      .prank-title {
+        font-size: 1.65rem;
+      }
+
+      .prank-text {
+        font-size: 0.95rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1321,11 +1525,47 @@
           </div>
         </div>
 
-        <div class="gallery-item" onclick="openLightbox('IMG-20260907-WA0060.jpg')">
-          <img src="IMG-20260907-WA0060.jpg" alt="Memory Snapshot 5" class="gallery-img" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_collage.png')">
+          <img src="photo_collage.png" alt="Master Photo Collage" class="gallery-img" loading="lazy">
           <div class="gallery-overlay">
-            <span class="gallery-caption">Joyful Laughs 🎉</span>
+            <span class="gallery-caption">Master Photo Collage 🖼️</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5.5. MASTER PHOTO COLLAGE PUZZLE SECTION -->
+    <section class="section container" id="collage-puzzle">
+      <div class="glass-card puzzle-card">
+        <h2 class="section-title">Master Photo <span>Collage Puzzle</span> 🖼️</h2>
+        <p class="section-subtitle">Swap the 16 scrambled tiles to reveal the complete Master Birthday Photo Collage!</p>
+
+        <div class="swap-grid-wrapper" id="collage-grid-wrapper">
+          <div class="swap-grid" id="collage-grid"></div>
+        </div>
+
+        <div class="puzzle-stats" id="collage-stats">
+          <span>Swaps: <strong id="collage-moves" style="color: var(--accent-gold);">0</strong></span>
+          <span style="margin: 0 10px; opacity: 0.4;">|</span>
+          <span>Status: <strong id="collage-status" style="color: var(--accent-teal);">Scrambled 🧩</strong></span>
+        </div>
+
+        <div class="puzzle-controls" id="collage-controls">
+          <button type="button" class="btn btn-sm btn-secondary" onclick="shuffleCollagePuzzle()">🔄 Reshuffle</button>
+          <button type="button" class="btn btn-sm" onclick="autoSolveCollagePuzzle()">✨ Auto Solve & Reveal</button>
+        </div>
+
+        <div class="puzzle-solved-card" id="collage-solved-card">
+          <div class="solved-badge">🎉 Master Photo Collage Revealed!</div>
+          <div class="puzzle-solved-img-wrap" onclick="openLightbox('photo_collage.png')">
+            <img src="photo_collage.png" alt="Master Birthday Photo Collage" class="puzzle-solved-img">
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Click to view full size 🔍</span>
+            </div>
+          </div>
+          <p class="puzzle-solved-desc">"All our favorite moments & smiles together in one beautiful masterpiece." 💖📸</p>
+          <button type="button" class="btn btn-sm btn-secondary" onclick="shuffleCollagePuzzle()">🎮 Play Collage Puzzle Again</button>
         </div>
       </div>
     </section>
@@ -1341,11 +1581,6 @@
         <p class="music-caption">Press play to listen to her favorite birthday tune 🎧</p>
 
         <div class="audio-player-wrapper">
-          <!-- 
-            EDITABLE AUDIO SOURCE:
-            Point the src attribute below to your audio file (e.g. her-song.mp3 or birthday.mp3).
-            Alternatively, swap this HTML5 <audio> element with a Spotify or YouTube <iframe> embed.
-          -->
           <audio controls src="her-song.mp3" preload="metadata">
             Your browser does not support the audio element.
           </audio>
@@ -1376,6 +1611,25 @@
       </div>
     </section>
 
+
+    <!-- 7.5. PRANK GIFT BOX SECTION -->
+    <section class="section container" id="gifts">
+      <div class="glass-card gift-box-card">
+        <h2 class="section-title">Your Special <span>Birthday Gift</span> 🎁</h2>
+        <p class="section-subtitle">You've unlocked a secret birthday surprise! Tap the box below to open your present...</p>
+
+        <div class="gift-box-icon-wrap" onclick="openPrankGift()" aria-label="Open Birthday Gift Box">
+          🎁
+        </div>
+
+        <div>
+          <button type="button" class="btn" onclick="openPrankGift()">
+            🎁 Open My Gift!
+          </button>
+        </div>
+      </div>
+    </section>
+
   </main>
 
 
@@ -1387,6 +1641,23 @@
       <p class="footer-sub">Wishing you the happiest birthday & a glorious year ahead! 🎂✨</p>
     </div>
   </footer>
+
+
+  <!-- PRANK GIFT OVERLAY MODAL -->
+  <div id="prank-modal" class="prank-modal" onclick="closePrankGift(event)">
+    <div class="prank-modal-content">
+      <div class="prank-emoji">🤪😜</div>
+      <h3 class="prank-title">Ayye Gundumani Pattiche...! 😂</h3>
+      <p class="prank-text">
+        Did you really expect an expensive physical gift delivered inside a website? 🤣<br><br>
+        Your <strong>REAL birthday gift</strong> is this entire website, endless tea promises, and all these unforgettable memories together! 💖✨<br><br>
+        <em>P.S. Still waiting on that promised tea though! ☕🫖</em>
+      </p>
+      <button type="button" class="btn" onclick="closePrankGift(event)" style="width: 100%;">
+        Okay fine, I was fooled! 😂
+      </button>
+    </div>
+  </div>
 
 
   <!-- LIGHTBOX MODAL -->
@@ -1810,6 +2081,157 @@
 
       document.addEventListener('DOMContentLoaded', shuffleGrid);
     })();
+
+
+    /* ==========================================================================
+       GAME 3: MASTER PHOTO COLLAGE 4X4 TILE SWAP PUZZLE
+       ========================================================================== */
+    (function() {
+      const GRID_SIZE = 4;
+      let tileOrder = Array.from({length: 16}, (_, i) => i);
+      let selectedIdx = null;
+      let moveCount = 0;
+      let isSolved = false;
+
+      function getBgPos(tileId) {
+        const row = Math.floor(tileId / GRID_SIZE);
+        const col = tileId % GRID_SIZE;
+        const x = (col / (GRID_SIZE - 1)) * 100;
+        const y = (row / (GRID_SIZE - 1)) * 100;
+        return `${x}% ${y}%`;
+      }
+
+      function renderGrid() {
+        const gridEl = document.getElementById('collage-grid');
+        if (!gridEl) return;
+        gridEl.innerHTML = '';
+        tileOrder.forEach((tileId, currentIdx) => {
+          const tile = document.createElement('div');
+          tile.className = 'collage-swap-tile';
+          if (selectedIdx === currentIdx) {
+            tile.classList.add('selected');
+          }
+          tile.style.backgroundImage = "url('photo_collage.png')";
+          tile.style.backgroundSize = "400% 400%";
+          tile.style.backgroundPosition = getBgPos(tileId);
+          tile.onclick = () => handleTileClick(currentIdx);
+          gridEl.appendChild(tile);
+        });
+      }
+
+      function handleTileClick(clickedIdx) {
+        if (isSolved) return;
+
+        if (selectedIdx === null) {
+          selectedIdx = clickedIdx;
+          renderGrid();
+        } else if (selectedIdx === clickedIdx) {
+          selectedIdx = null;
+          renderGrid();
+        } else {
+          // Swap tiles
+          const temp = tileOrder[selectedIdx];
+          tileOrder[selectedIdx] = tileOrder[clickedIdx];
+          tileOrder[clickedIdx] = temp;
+
+          selectedIdx = null;
+          moveCount++;
+          const movesEl = document.getElementById('collage-moves');
+          if (movesEl) movesEl.textContent = moveCount;
+          renderGrid();
+
+          checkSolved();
+        }
+      }
+
+      function checkSolved() {
+        const solved = tileOrder.every((val, idx) => val === idx);
+        if (solved) {
+          triggerSolved();
+        }
+      }
+
+      function triggerSolved() {
+        isSolved = true;
+        const statusEl = document.getElementById('collage-status');
+        if (statusEl) statusEl.textContent = '🎉 Solved!';
+
+        if (typeof startConfetti === 'function') {
+          startConfetti();
+        }
+
+        const puzzleWrapper = document.getElementById('collage-grid-wrapper');
+        const puzzleControls = document.getElementById('collage-controls');
+        const puzzleStats = document.getElementById('collage-stats');
+        const solvedCard = document.getElementById('collage-solved-card');
+
+        setTimeout(() => {
+          if (puzzleWrapper) puzzleWrapper.style.display = 'none';
+          if (puzzleControls) puzzleControls.style.display = 'none';
+          if (puzzleStats) puzzleStats.style.display = 'none';
+          if (solvedCard) solvedCard.classList.add('active');
+        }, 400);
+      }
+
+      function shuffleGrid() {
+        isSolved = false;
+        selectedIdx = null;
+        moveCount = 0;
+        const movesEl = document.getElementById('collage-moves');
+        const statusEl = document.getElementById('collage-status');
+        const puzzleWrapper = document.getElementById('collage-grid-wrapper');
+        const puzzleControls = document.getElementById('collage-controls');
+        const puzzleStats = document.getElementById('collage-stats');
+        const solvedCard = document.getElementById('collage-solved-card');
+
+        if (movesEl) movesEl.textContent = moveCount;
+        if (statusEl) statusEl.textContent = 'Scrambled 🧩';
+        if (puzzleWrapper) puzzleWrapper.style.display = 'block';
+        if (puzzleControls) puzzleControls.style.display = 'flex';
+        if (puzzleStats) puzzleStats.style.display = 'block';
+        if (solvedCard) solvedCard.classList.remove('active');
+
+        do {
+          for (let i = tileOrder.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [tileOrder[i], tileOrder[j]] = [tileOrder[j], tileOrder[i]];
+          }
+        } while (tileOrder.every((val, idx) => val === idx));
+
+        renderGrid();
+      }
+
+      function autoSolve() {
+        tileOrder = Array.from({length: 16}, (_, i) => i);
+        selectedIdx = null;
+        renderGrid();
+        triggerSolved();
+      }
+
+      window.shuffleCollagePuzzle = shuffleGrid;
+      window.autoSolveCollagePuzzle = autoSolve;
+
+      document.addEventListener('DOMContentLoaded', shuffleGrid);
+    })();
+
+
+    // Prank Gift Box Functions
+    function openPrankGift() {
+      const modal = document.getElementById('prank-modal');
+      if (modal) {
+        modal.classList.add('active');
+        if (typeof startConfetti === 'function') {
+          startConfetti();
+        }
+      }
+    }
+
+    function closePrankGift(e) {
+      const modal = document.getElementById('prank-modal');
+      if (modal) {
+        modal.classList.remove('active');
+      }
+    }
   </script>
 </body>
 </html>
