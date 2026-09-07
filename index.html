@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gundumani's Birthday 🎉</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- QR Code Generator Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-dark: #120A24;
+      --bg-card: #1A1033;
+      --bg-card-hover: #241747;
+      --accent-gold: #F4B942;
+      --accent-pink: #FF6F91;
+      --accent-teal: #5EC9C0;
+      --text-cream: #FFF6E9;
+      --text-muted: #B8B0D6;
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-script: 'Caveat', cursive;
+
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      
+      --shadow-glow: 0 10px 30px rgba(244, 185, 66, 0.15);
+      --shadow-card: 0 15px 35px rgba(0, 0, 0, 0.4);
+      --border-glass: 1px solid rgba(255, 246, 233, 0.1);
+    }
+
+    /* Reset & Core Setup */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-cream);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(255, 111, 145, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 70%, rgba(94, 201, 192, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(244, 185, 66, 0.05) 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    /* Focus accessibility */
+    :focus-visible {
+      outline: 2px solid var(--accent-gold);
+      outline-offset: 4px;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Common Layout & Container */
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .glass-card {
+      background: rgba(26, 16, 51, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: var(--border-glass);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      color: var(--text-cream);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title span {
+      color: var(--accent-gold);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-gold), #E5A429);
+      color: #120A24;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(244, 185, 66, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(244, 185, 66, 0.45);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       INTRO SPLASH OVERLAY (CORE FEATURE)
+       ========================================================================== */
+    #intro-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: radial-gradient(circle at center, #1A1033 0%, #120A24 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    }
+
+    #intro-splash.fade-out {
+      opacity: 0;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+
+    /* Falling Confetti Canvas/Container */
+    .confetti-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .confetti-item {
+      position: absolute;
+      top: -10%;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      user-select: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      80% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Splash Content Elements */
+    .splash-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+    }
+
+    .splash-greeting {
+      transition: opacity 0.5s ease;
+    }
+
+    .splash-greeting.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .splash-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--accent-gold);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 25px rgba(244, 185, 66, 0.4);
+      animation: pulse-subtle 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-subtle {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .splash-subtext {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      color: var(--text-cream);
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      opacity: 0.9;
+    }
+
+    /* Countdown Display */
+    .splash-countdown {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-heading);
+      font-size: clamp(6rem, 20vw, 12rem);
+      font-weight: 700;
+      color: var(--accent-pink);
+      text-shadow: 0 0 40px rgba(255, 111, 145, 0.6);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .splash-countdown.pop-in {
+      animation: countdownPop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes countdownPop {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.15);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 1.5rem 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: 750px;
+    }
+
+    .hero-photo-frame {
+      width: clamp(220px, 45vw, 320px);
+      height: clamp(220px, 45vw, 320px);
+      border-radius: 50%;
+      padding: 8px;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink), var(--accent-teal));
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(244, 185, 66, 0.25);
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-photo-frame.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--bg-dark);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-teal);
+      background: rgba(94, 201, 192, 0.12);
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      border: 1px solid rgba(94, 201, 192, 0.3);
+    }
+
+    .hero-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.1;
+      color: var(--text-cream);
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtext {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      color: var(--text-muted);
+      max-width: 580px;
+      font-weight: 300;
+    }
+
+    .scroll-hint {
+      margin-top: 2rem;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .scroll-hint:hover {
+      opacity: 1;
+      color: var(--accent-gold);
+    }
+
+    .scroll-arrow {
+      animation: bounce 2s infinite;
+      font-size: 1.4rem;
+      color: var(--accent-gold);
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4deg); }
+    }
+
+    /* ==========================================================================
+       MESSAGE SECTION
+       ========================================================================== */
+    .message-card {
+      text-align: center;
+      position: relative;
+      background: linear-gradient(145deg, rgba(26, 16, 51, 0.85), rgba(18, 10, 36, 0.95));
+      border: 1px solid rgba(244, 185, 66, 0.2);
+    }
+
+    .message-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .message-text {
+      font-family: var(--font-heading);
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      line-height: 1.8;
+      color: var(--text-cream);
+      font-style: italic;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .message-signature {
+      font-family: var(--font-script);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: var(--accent-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      line-height: 1.2;
+      padding-right: 1rem;
+    }
+
+    .message-signature span {
+      font-size: 0.5em;
+      color: var(--accent-pink);
+      font-family: var(--font-body);
+      font-style: normal;
+      letter-spacing: 1px;
+    }
+
+    /* ==========================================================================
+       TIMELINE SECTION
+       ========================================================================== */
+    .timeline-container {
+      position: relative;
+      padding-left: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 11px;
+      top: 10px;
+      bottom: 10px;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--accent-gold), var(--accent-pink), var(--accent-teal));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.5rem;
+      top: 5px;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 3px solid var(--accent-gold);
+      box-shadow: 0 0 15px rgba(244, 185, 66, 0.5);
+      z-index: 2;
+    }
+
+    .timeline-item:nth-child(2) .timeline-dot { border-color: var(--accent-pink); box-shadow: 0 0 15px rgba(255, 111, 145, 0.5); }
+    .timeline-item:nth-child(3) .timeline-dot { border-color: var(--accent-teal); box-shadow: 0 0 15px rgba(94, 201, 192, 0.5); }
+    .timeline-item:nth-child(4) .timeline-dot { border-color: var(--accent-gold); box-shadow: 0 0 15px rgba(244, 185, 66, 0.5); }
+
+    .timeline-card {
+      background: rgba(26, 16, 51, 0.6);
+      border: var(--border-glass);
+      border-radius: var(--radius-md);
+      padding: 1.5rem 1.8rem;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateX(5px);
+      border-color: rgba(244, 185, 66, 0.3);
+    }
+
+    .timeline-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      color: var(--text-cream);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-desc {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       PHOTO GALLERY SECTION
+       ========================================================================== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 800px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      border: var(--border-glass);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      background: var(--bg-card);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 111, 145, 0.2);
+      border-color: rgba(255, 111, 145, 0.4);
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.06);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(18, 10, 36, 0.7) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-caption {
+      color: var(--text-cream);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Lightbox Modal */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(10, 5, 20, 0.92);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: var(--radius-md);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--text-cream);
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 111, 145, 0.8);
+    }
+
+    /* ==========================================================================
+       MUSIC SECTION
+       ========================================================================== */
+    .music-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .disc-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: spin-slow 12s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .music-title {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+      margin-bottom: 0.3rem;
+    }
+
+    .music-caption {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .audio-player-wrapper {
+      width: 100%;
+      background: rgba(18, 10, 36, 0.7);
+      padding: 1.2rem;
+      border-radius: var(--radius-md);
+      border: var(--border-glass);
+    }
+
+    audio {
+      width: 100%;
+      height: 44px;
+      outline: none;
+      filter: invert(0.9) hue-rotate(220deg);
+    }
+
+    .music-note-embed {
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      opacity: 0.75;
+    }
+
+    /* ==========================================================================
+       SHARE & QR SECTION
+       ========================================================================== */
+    .share-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .qr-container-wrapper {
+      background: #FFFFFF;
+      padding: 1.2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin: 1.5rem 0;
+    }
+
+    #qrcode {
+      display: flex;
+      justify-content: center;
+    }
+
+    #qrcode img {
+      display: block !important;
+    }
+
+    .share-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    /* Toast notification */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: linear-gradient(135deg, var(--accent-teal), #3B9E96);
+      color: #120A24;
+      font-weight: 600;
+      padding: 0.8rem 1.6rem;
+      border-radius: 50px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 10000;
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      border-top: var(--border-glass);
+      margin-top: 3rem;
+      background: rgba(18, 10, 36, 0.5);
+    }
+
+    .footer-closing {
+      font-family: var(--font-script);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--accent-gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-sub {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ==========================================================================
+       ACCESSIBILITY & REDUCED MOTION
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .confetti-item {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. FULL-SCREEN INTRO SPLASH (CORE FEATURE)
+       ========================================================================== -->
+  <div id="intro-splash" aria-live="polite">
+    <!-- Gently falling confetti container -->
+    <div class="confetti-container" id="confetti-container"></div>
+
+    <div class="splash-content">
+      <!-- Greeting Text -->
+      <div id="splash-greeting" class="splash-greeting">
+        <!-- EDITABLE: Intro Greeting Title & Subtext -->
+        <h1 class="splash-title">Ayye Gundumani... 🎉🥳🎂</h1>
+        <p class="splash-subtext">Something special is waiting for you...</p>
+      </div>
+    </div>
+
+    <!-- Countdown Display -->
+    <div id="splash-countdown" class="splash-countdown" aria-hidden="true"></div>
+  </div>
+
+
+  <!-- ==========================================================================
+       LANDING PAGE CONTENT
+       ========================================================================== -->
+  <main id="main-content">
+
+    <!-- 2. HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-content">
+        <div class="eyebrow">happy birthday</div>
+
+        <!-- Hero Photo Frame with Real Image -->
+        <div class="hero-photo-frame" id="hero-photo-frame">
+          <img src="20250428_193019.jpg" alt="Gundumani Birthday Photo" class="hero-img">
+        </div>
+
+        <!-- EDITABLE: Hero Headline & Subtext -->
+        <h1 class="hero-headline">Gundumani</h1>
+        <p class="hero-subtext">Celebrating another wonderful year of joy, laughter, and unforgettable moments. ✨</p>
+
+        <a href="#message" class="scroll-hint" aria-label="Scroll to birthday message">
+          <span>Explore the memories</span>
+          <span class="scroll-arrow">↓</span>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- 3. MESSAGE SECTION -->
+    <section class="section container" id="message">
+      <div class="glass-card message-card">
+        <div class="message-icon">💌</div>
+        
+        <!-- EDITABLE: Birthday Message Paragraph -->
+        <p class="message-text">
+          "Happy Birthday, Gundumani! May your day be as bright and wonderful as the warmth you bring into everyone’s lives. Thank you for being such an extraordinary person, bringing smiles, comfort, and boundless happiness wherever you go. Here’s to celebrating another year of dreams fulfilled, endless laughter, and beautiful new beginnings!"
+        </p>
+
+        <!-- EDITABLE: Signature Line -->
+        <div class="message-signature">
+          With all my love,
+          <span>ALWAYS & FOREVER ❤️</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 4. TIMELINE SECTION -->
+    <section class="section container" id="timeline">
+      <h2 class="section-title">Memory <span>Timeline</span> ⏳</h2>
+      <p class="section-subtitle">A look back at some of our favorite chapters together</p>
+
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <!-- EDITABLE: Timeline Entry 1 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-badge">Chapter 01</span>
+            <h3 class="timeline-title">The First Hello 👋</h3>
+            <p class="timeline-desc">
+              Where our story began — a simple moment that grew into an irreplaceable bond full of trust and genuine smiles.
+            </p>
+          </div>
+        </div>
+
+        <!-- EDITABLE: Timeline Entry 2 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-badge">Chapter 02</span>
+            <h3 class="timeline-title">Endless Laughter & Adventures ✨</h3>
+            <p class="timeline-desc">
+              From impromptu conversations to unforgettable trips, every adventure spent with you is a memory treasured forever.
+            </p>
+          </div>
+        </div>
+
+        <!-- EDITABLE: Timeline Entry 3 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-badge">Chapter 03</span>
+            <h3 class="timeline-title">Through Every Milestone 🌟</h3>
+            <p class="timeline-desc">
+              Supporting each other’s dreams, celebrating victories big and small, and always standing by one another.
+            </p>
+          </div>
+        </div>
+
+        <!-- EDITABLE: Timeline Entry 4 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-badge">Chapter 04</span>
+            <h3 class="timeline-title">Another Year Brighter 🎂</h3>
+            <p class="timeline-desc">
+              Stepping into today with excitement for all the beautiful chapters yet to be written in your journey ahead!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5. PHOTO GALLERY SECTION -->
+    <section class="section container" id="gallery">
+      <h2 class="section-title">Photo <span>Gallery</span> 📸</h2>
+      <p class="section-subtitle">Snapshots of moments saved in time (click any photo to view full size)</p>
+
+      <!-- Responsive Grid with 7 Real Local Images -->
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox('IMG-20250907-WA0013.jpg')">
+          <img src="IMG-20250907-WA0013.jpg" alt="Memory Snapshot 1" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Precious Moments ✨</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('IMG-20250913-WA0029.jpg')">
+          <img src="IMG-20250913-WA0029.jpg" alt="Memory Snapshot 2" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Brightest Smiles 😁</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('IMG-20250913-WA0031.jpg')">
+          <img src="IMG-20250913-WA0031.jpg" alt="Memory Snapshot 3" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Joyful Days 🌟</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('IMG-20260907-WA0056.jpg')">
+          <img src="IMG-20260907-WA0056.jpg" alt="Memory Snapshot 4" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Unfiltered Happiness 💖</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('IMG-20260907-WA0060.jpg')">
+          <img src="IMG-20260907-WA0060.jpg" alt="Memory Snapshot 5" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Cherished Memories 📸</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('IMG-20260907-WA0061.jpg')">
+          <img src="IMG-20260907-WA0061.jpg" alt="Memory Snapshot 6" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Good Vibes Only 🥳</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('IMG-20260907-WA0062.jpg')">
+          <img src="IMG-20260907-WA0062.jpg" alt="Memory Snapshot 7" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Forever Memories 💕</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 6. MUSIC SECTION -->
+    <section class="section container" id="music">
+      <div class="glass-card music-card">
+        <div class="disc-icon">🎵</div>
+
+        <!-- EDITABLE: Music Track Details -->
+        <h2 class="music-title">Her Special Track</h2>
+        <p class="music-caption">Press play to listen to her favorite birthday tune 🎧</p>
+
+        <div class="audio-player-wrapper">
+          <!-- 
+            EDITABLE AUDIO SOURCE:
+            Point the src attribute below to your audio file (e.g. her-song.mp3 or birthday.mp3).
+            Alternatively, swap this HTML5 <audio> element with a Spotify or YouTube <iframe> embed.
+          -->
+          <audio controls src="her-song.mp3" preload="metadata">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <p class="music-note-embed">
+          💡 <em>Tip: Place an audio file named <code>her-song.mp3</code> in this folder, or replace this player with a Spotify/YouTube embed code!</em>
+        </p>
+      </div>
+    </section>
+
+
+    <!-- 7. SHARE & QR CODE SECTION -->
+    <section class="section container" id="share">
+      <div class="glass-card share-card">
+        <h2 class="section-title">Share The <span>Magic</span> ✨</h2>
+        <p class="section-subtitle" style="margin-bottom: 0;">Scan this QR code or copy the link to share Gundumani's birthday page</p>
+
+        <div class="qr-container-wrapper">
+          <div id="qrcode"></div>
+        </div>
+
+        <div class="share-actions">
+          <button id="copy-btn" class="btn" onclick="copyPageLink()">
+            📋 Copy Page Link
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- 8. FOOTER -->
+  <footer>
+    <div class="container">
+      <!-- EDITABLE: Footer Text -->
+      <div class="footer-closing">Made with ❤️ for Gundumani</div>
+      <p class="footer-sub">Wishing you the happiest birthday & a glorious year ahead! 🎂✨</p>
+    </div>
+  </footer>
+
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close photo view">&times;</button>
+    <img src="" alt="Full view" id="lightbox-img" class="lightbox-img">
+  </div>
+
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast">Link copied to clipboard! 🎉</div>
+
+
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ----------------------------------------------------------------------
+      // 1. GENERATE FALLING CONFETTI
+      // ----------------------------------------------------------------------
+      const confettiContainer = document.getElementById('confetti-container');
+      const emojis = ['🎉', '🎈', '✨', '🎂', '🥳', '💫', '💖', '🌟'];
+      const confettiCount = 35;
+
+      for (let i = 0; i < confettiCount; i++) {
+        const item = document.createElement('div');
+        item.className = 'confetti-item';
+        item.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        item.style.left = `${Math.random() * 100}%`;
+        item.style.animationDuration = `${4 + Math.random() * 5}s`;
+        item.style.animationDelay = `${Math.random() * 3}s`;
+        confettiContainer.appendChild(item);
+      }
+
+      // ----------------------------------------------------------------------
+      // 2. CORE INTRO SEQUENCE TIMING
+      // ----------------------------------------------------------------------
+      const splashGreeting = document.getElementById('splash-greeting');
+      const splashCountdown = document.getElementById('splash-countdown');
+      const introSplash = document.getElementById('intro-splash');
+      const heroPhotoFrame = document.getElementById('hero-photo-frame');
+
+      // Timeline:
+      // T = 0ms: Greeting text visible + Confetti falling
+      // T = 5000ms: Greeting text disappears (5 seconds exact)
+      // T = 5200ms -> 7300ms: Countdown 3 -> 2 -> 1 (~700ms apart)
+      // T = 7400ms: Splash screen fades out
+      // T = 7600ms: Reveal Hero photo frame
+
+      setTimeout(() => {
+        // Step 1: Hide Greeting Text at exactly 5 seconds
+        splashGreeting.classList.add('hidden');
+
+        setTimeout(() => {
+          // Step 2: Start Countdown Sequence (3 -> 2 -> 1)
+          const numbers = ['3', '2', '1'];
+          let idx = 0;
+
+          splashCountdown.style.opacity = '1';
+
+          function showNextNumber() {
+            if (idx < numbers.length) {
+              splashCountdown.textContent = numbers[idx];
+              splashCountdown.classList.remove('pop-in');
+              // Force reflow for re-triggering animation
+              void splashCountdown.offsetWidth;
+              splashCountdown.classList.add('pop-in');
+              idx++;
+              setTimeout(showNextNumber, 700); // 700ms apart
+            } else {
+              // Step 3: Countdown Finished -> Fade out splash screen
+              splashCountdown.style.opacity = '0';
+              setTimeout(() => {
+                introSplash.classList.add('fade-out');
+
+                // Step 4: Trigger Hero Photo Entrance
+                setTimeout(() => {
+                  heroPhotoFrame.classList.add('revealed');
+                  introSplash.style.display = 'none';
+                }, 300);
+              }, 300);
+            }
+          }
+
+          showNextNumber();
+        }, 200);
+
+      }, 5000); // EXACT 5-SECOND INTRO DELAY
+
+
+      // ----------------------------------------------------------------------
+      // 3. AUTO-GENERATE QR CODE
+      // ----------------------------------------------------------------------
+      const qrTarget = document.getElementById('qrcode');
+      if (typeof QRCode !== 'undefined' && qrTarget) {
+        try {
+          new QRCode(qrTarget, {
+            text: window.location.href || 'https://gundumani-birthday.com',
+            width: 160,
+            height: 160,
+            colorDark : "#1A1033",
+            colorLight : "#FFFFFF",
+            correctLevel : QRCode.CorrectLevel.H
+          });
+        } catch (e) {
+          console.warn('QR Code generation notice:', e);
+        }
+      }
+    });
+
+    // ----------------------------------------------------------------------
+    // 4. COPY LINK FUNCTIONALITY WITH TOAST
+    // ----------------------------------------------------------------------
+    function copyPageLink() {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('Link copied to clipboard! 🎉');
+      }).catch(() => {
+        // Fallback for older browsers
+        const tempInput = document.createElement('input');
+        tempInput.value = url;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        showToast('Link copied to clipboard! 🎉');
+      });
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // ----------------------------------------------------------------------
+    // 5. LIGHTBOX MODAL FUNCTIONALITY
+    // ----------------------------------------------------------------------
+    function openLightbox(imgSrc) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = imgSrc;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox(event) {
+      if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+      }
+    }
+  </script>
+</body>
+</html>
