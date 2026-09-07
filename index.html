@@ -284,32 +284,32 @@
     }
 
     /* ==========================================================================
-       2. HERO SECTION (BRIGHT VIVID BACKGROUND PHOTO WITH SOFT TEXT FADE)
+       2. HERO SECTION (BRIGHT VIVID 100% UNFILTERED PORTRAIT)
        ========================================================================== */
     .hero-section {
       position: relative;
       min-height: 92vh;
       display: flex;
       align-items: center;
-      padding: 5rem 0;
+      padding: 4rem 0;
       overflow: hidden;
     }
 
-    /* Hero Background Image Wrapper */
+    /* Hero Background Image Wrapper (100% Raw Brightness, No Mask) */
     .hero-bg-wrapper {
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
-      width: 60%;
+      width: 52%;
       z-index: 1;
       opacity: 0;
-      transform: scale(1.03);
+      transform: scale(1.02);
       transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .hero-bg-wrapper.revealed {
-      opacity: 1;
+      opacity: 1 !important;
       transform: scale(1);
     }
 
@@ -319,14 +319,13 @@
       object-fit: cover;
       object-position: center top;
       display: block;
-      filter: brightness(1.05) contrast(1.04) saturate(1.05);
+      filter: none !important;
+      opacity: 1 !important;
     }
 
-    /* Subtle gradient fade only behind the text on left side so portrait remains bright and crisp */
+    /* No overlay dimming on top of the image */
     .hero-bg-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, #FAFAFC 0%, rgba(250, 250, 252, 0.85) 22%, rgba(250, 250, 252, 0.12) 48%, transparent 75%);
+      display: none !important;
     }
 
     .hero-container {
@@ -339,7 +338,14 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 1.5rem;
-      max-width: 580px;
+      max-width: 520px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      border: var(--border-glass);
+      box-shadow: var(--shadow-card);
     }
 
     .eyebrow {
@@ -401,19 +407,28 @@
     }
 
     @media (max-width: 868px) {
-      .hero-bg-wrapper {
-        width: 100%;
-        opacity: 0.35 !important;
+      .hero-section {
+        flex-direction: column-reverse;
+        padding: 3rem 0;
+        gap: 2rem;
       }
-      
-      .hero-bg-overlay {
-        background: linear-gradient(to bottom, rgba(250, 250, 252, 0.85) 0%, rgba(250, 250, 252, 0.95) 100%);
+
+      .hero-bg-wrapper {
+        position: relative;
+        width: 100%;
+        height: 480px;
+        opacity: 1 !important;
+        transform: none !important;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-card);
       }
 
       .hero-text-col {
         align-items: center;
         text-align: center;
         margin: 0 auto;
+        width: 100%;
       }
     }
 
@@ -954,21 +969,15 @@
           </div>
         </div>
 
-        <!-- EDITABLE: Timeline Entry 2 (WITH CHATGPT TALKING MEMORY OIL PAINTING) -->
+        <!-- EDITABLE: Timeline Entry 2 -->
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-card">
             <span class="timeline-badge">Chapter 02</span>
-            <h3 class="timeline-title">Endless Laughter & Talking Memory Artwork ✨</h3>
+            <h3 class="timeline-title">Endless Laughter & Cherished Memories ✨</h3>
             <p class="timeline-desc">
-              From impromptu conversations to unforgettable trips — a specially rendered talking oil painting artwork capturing our favorite memories together.
+              From impromptu conversations to unforgettable trips — moments filled with endless laughter, warmth, and pure happiness together.
             </p>
-
-            <!-- ChatGPT Talking Memory Oil Painting Artwork Card -->
-            <div class="timeline-media-card" onclick="openLightbox('chatgpt_oil_painting.png')">
-              <img src="chatgpt_oil_painting.png" alt="ChatGPT Talking Memory Oil Painting Artwork" class="timeline-media-img">
-              <div class="timeline-media-badge">🎨 AI Talking Memory Oil Painting</div>
-            </div>
           </div>
         </div>
 
@@ -1004,33 +1013,12 @@
       <h2 class="section-title">Photo <span>Gallery</span> 📸</h2>
       <p class="section-subtitle">Snapshots of moments saved in time (click any photo to view full size)</p>
 
-      <!-- Responsive Grid with Real Local Images & Artwork -->
+      <!-- Responsive Grid with Real Local Images -->
       <div class="gallery-grid">
-        <div class="gallery-item" onclick="openLightbox('chatgpt_oil_painting.png')">
-          <img src="chatgpt_oil_painting.png" alt="ChatGPT Talking Memory Oil Painting" class="gallery-img" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('20250428_193019.jpg')">
+          <img src="20250428_193019.jpg" alt="Gundumani Birthday Portrait" class="gallery-img" loading="lazy">
           <div class="gallery-overlay">
-            <span class="gallery-caption">Talking Oil Painting 🎨</span>
-          </div>
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox('timeline_oil_painting.png')">
-          <img src="timeline_oil_painting.png" alt="Memory Oil Painting" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-caption">Memory Oil Painting 🎨</span>
-          </div>
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox('gundumani_oil_painting.png')">
-          <img src="gundumani_oil_painting.png" alt="Gundumani AI Oil Painting" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-caption">Portrait Oil Painting 🎨</span>
-          </div>
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox('gundumani_photo.jpg')">
-          <img src="gundumani_photo.jpg" alt="Gundumani Original Portrait" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-caption">Original Photo 📸</span>
+            <span class="gallery-caption">Birthday Portrait 💖</span>
           </div>
         </div>
 
@@ -1045,6 +1033,27 @@
           <img src="IMG-20250913-WA0029.jpg" alt="Memory Snapshot 2" class="gallery-img" loading="lazy">
           <div class="gallery-overlay">
             <span class="gallery-caption">Brightest Smiles 😁</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('IMG-20250913-WA0031.jpg')">
+          <img src="IMG-20250913-WA0031.jpg" alt="Memory Snapshot 3" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Golden Days 🌟</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('IMG-20260907-WA0056.jpg')">
+          <img src="IMG-20260907-WA0056.jpg" alt="Memory Snapshot 4" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Unforgettable Times 🌺</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('IMG-20260907-WA0060.jpg')">
+          <img src="IMG-20260907-WA0060.jpg" alt="Memory Snapshot 5" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Joyful Laughs 🎉</span>
           </div>
         </div>
       </div>
