@@ -877,8 +877,13 @@
       }
     }
 
+      .confetti-item {
+        display: none !important;
+      }
+    }
+
     /* ==========================================================================
-       MYSTERY ARTWORK PUZZLE SECTION STYLES
+       SECRET MEMORY VAULT PUZZLE STYLES (CARD MATCH LOCK)
        ========================================================================== */
     .puzzle-card {
       text-align: center;
@@ -890,50 +895,49 @@
     .puzzle-grid-wrapper {
       position: relative;
       width: 100%;
-      max-width: 420px;
-      aspect-ratio: 1 / 1;
+      max-width: 440px;
       margin: 1.5rem auto 1rem auto;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(217, 119, 6, 0.2);
-      border: 3px solid rgba(217, 119, 6, 0.4);
-      background: #0F172A;
     }
 
-    .puzzle-grid {
+    .memory-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      width: 100%;
-      height: 100%;
-      gap: 3px;
-      background: rgba(217, 119, 6, 0.3);
+      gap: 12px;
+      margin-bottom: 1rem;
     }
 
-    .puzzle-tile {
-      width: 100%;
-      height: 100%;
-      background-image: url('chatgpt_oil_painting.png');
-      background-size: 300% 300%;
+    .memory-card-item {
+      aspect-ratio: 1 / 1.05;
+      background: linear-gradient(145deg, #1E293B, #0F172A);
+      border: 2px solid rgba(217, 119, 6, 0.4);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-      position: relative;
       user-select: none;
-      box-sizing: border-box;
-      border-radius: 4px;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      box-shadow: var(--shadow-card);
+      position: relative;
     }
 
-    .puzzle-tile:hover {
-      transform: scale(0.96);
-      filter: brightness(1.1);
-      z-index: 2;
+    .memory-card-item:hover {
+      transform: translateY(-3px) scale(1.02);
+      border-color: var(--accent-gold);
+      box-shadow: 0 10px 25px rgba(217, 119, 6, 0.3);
     }
 
-    .puzzle-tile.selected {
-      outline: 3.5px solid var(--accent-gold);
-      outline-offset: -3.5px;
-      box-shadow: inset 0 0 20px rgba(217, 119, 6, 0.8), 0 0 15px rgba(217, 119, 6, 0.7);
-      z-index: 3;
+    .memory-card-item.flipped {
+      background: linear-gradient(135deg, #FFFFFF, #F1F5F9);
+      border-color: var(--accent-gold);
+    }
+
+    .memory-card-item.matched {
+      background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 20px rgba(217, 119, 6, 0.4);
       animation: pulseGold 0.8s infinite alternate;
     }
 
@@ -1146,32 +1150,32 @@
     </section>
 
 
-    <!-- 4.5. MYSTERY ARTWORK PUZZLE SECTION -->
+    <!-- 4.5. SECRET MEMORY VAULT PUZZLE SECTION -->
     <section class="section container" id="puzzle">
       <div class="glass-card puzzle-card">
-        <h2 class="section-title">Secret Artwork <span>Puzzle</span> 🧩</h2>
-        <p class="section-subtitle">Click & swap any two scrambled tiles to assemble the hidden AI Memory Oil Painting!</p>
+        <h2 class="section-title">Secret Birthday <span>Vault</span> 🔐</h2>
+        <p class="section-subtitle">Flip and match all 3 pairs of magic birthday cards to unlock the secret AI Oil Painting!</p>
 
         <!-- Puzzle Game Container -->
         <div class="puzzle-grid-wrapper" id="puzzle-grid-wrapper">
-          <div class="puzzle-grid" id="puzzle-grid"></div>
+          <div class="memory-grid" id="memory-grid"></div>
         </div>
 
         <div class="puzzle-stats" id="puzzle-stats">
-          <span>Moves: <strong id="puzzle-moves" style="color: var(--accent-gold);">0</strong></span>
+          <span>Flips: <strong id="puzzle-moves" style="color: var(--accent-gold);">0</strong></span>
           <span style="margin: 0 10px; opacity: 0.4;">|</span>
-          <span>Status: <strong id="puzzle-status" style="color: var(--accent-teal);">Scrambled 🧩</strong></span>
+          <span>Status: <strong id="puzzle-status" style="color: var(--accent-teal);">Locked 🔒</strong></span>
         </div>
 
         <!-- Action Buttons -->
         <div class="puzzle-controls" id="puzzle-controls">
-          <button type="button" class="btn btn-sm btn-secondary" onclick="shufflePuzzle()">🔄 Reshuffle</button>
-          <button type="button" class="btn btn-sm" onclick="autoSolvePuzzle()">✨ Auto Solve & Reveal</button>
+          <button type="button" class="btn btn-sm btn-secondary" onclick="shufflePuzzle()">🔄 Shuffle Cards</button>
+          <button type="button" class="btn btn-sm" onclick="autoSolvePuzzle()">✨ Auto Unlock Vault</button>
         </div>
 
         <!-- Solved Reward Card (Appears upon solving puzzle) -->
         <div class="puzzle-solved-card" id="puzzle-solved-card">
-          <div class="solved-badge">🎉 Puzzle Solved! AI Talking Memory Oil Painting Revealed</div>
+          <div class="solved-badge">🎉 Vault Unlocked! AI Talking Memory Oil Painting Revealed</div>
           
           <div class="puzzle-solved-img-wrap" onclick="openLightbox('chatgpt_oil_painting.png')">
             <img src="chatgpt_oil_painting.png" alt="ChatGPT AI Talking Memory Oil Painting Artwork" class="puzzle-solved-img">
@@ -1184,7 +1188,7 @@
             "A specially rendered talking oil painting capturing our favorite memories together." 🎨✨
           </p>
 
-          <button type="button" class="btn btn-sm btn-secondary" onclick="shufflePuzzle()" style="margin-top: 0.5rem;">🎮 Play Puzzle Again</button>
+          <button type="button" class="btn btn-sm btn-secondary" onclick="shufflePuzzle()" style="margin-top: 0.5rem;">🎮 Play Vault Game Again</button>
         </div>
       </div>
     </section>
@@ -1477,76 +1481,96 @@
     }
 
     /* ==========================================================================
-       PUZZLE GAME SCRIPT (SWAP TILES TO REVEAL CHATGPT OIL PAINTING ARTWORK)
+       MEMORY MATCH VAULT GAME (UNLOCKS CHATGPT OIL PAINTING ARTWORK)
        ========================================================================== */
     (function() {
-      let tileOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-      let selectedIdx = null;
+      const cardsData = ['🎂', '🎂', '💖', '💖', '✨', '✨'];
+      let cards = [];
+      let flippedCards = [];
+      let matchedCount = 0;
       let moveCount = 0;
       let isSolved = false;
 
-      function getBgPos(tileId) {
-        const row = Math.floor(tileId / 3);
-        const col = tileId % 3;
-        return `${col * 50}% ${row * 50}%`;
-      }
+      function initMemoryGame() {
+        isSolved = false;
+        matchedCount = 0;
+        moveCount = 0;
+        flippedCards = [];
 
-      function renderGrid() {
-        const gridEl = document.getElementById('puzzle-grid');
+        const movesEl = document.getElementById('puzzle-moves');
+        const statusEl = document.getElementById('puzzle-status');
+        const puzzleWrapper = document.getElementById('puzzle-grid-wrapper');
+        const puzzleControls = document.getElementById('puzzle-controls');
+        const puzzleStats = document.getElementById('puzzle-stats');
+        const solvedCard = document.getElementById('puzzle-solved-card');
+
+        if (movesEl) movesEl.textContent = moveCount;
+        if (statusEl) statusEl.textContent = 'Locked 🔒';
+        if (puzzleWrapper) puzzleWrapper.style.display = 'block';
+        if (puzzleControls) puzzleControls.style.display = 'flex';
+        if (puzzleStats) puzzleStats.style.display = 'block';
+        if (solvedCard) solvedCard.classList.remove('active');
+
+        // Shuffle cards randomly
+        cards = [...cardsData].sort(() => Math.random() - 0.5);
+
+        const gridEl = document.getElementById('memory-grid');
         if (!gridEl) return;
         gridEl.innerHTML = '';
-        tileOrder.forEach((tileId, currentIdx) => {
-          const tile = document.createElement('div');
-          tile.className = 'puzzle-tile';
-          if (selectedIdx === currentIdx) {
-            tile.classList.add('selected');
-          }
-          tile.style.backgroundImage = "url('chatgpt_oil_painting.png')";
-          tile.style.backgroundSize = "300% 300%";
-          tile.style.backgroundPosition = getBgPos(tileId);
-          tile.onclick = () => handleTileClick(currentIdx);
-          gridEl.appendChild(tile);
+
+        cards.forEach((symbol, index) => {
+          const card = document.createElement('div');
+          card.className = 'memory-card-item';
+          card.setAttribute('data-index', index);
+          card.innerHTML = `<span class="card-back">🎁</span>`;
+
+          card.onclick = () => flipCard(card, symbol, index);
+          gridEl.appendChild(card);
         });
       }
 
-      function handleTileClick(clickedIdx) {
-        if (isSolved) return;
+      function flipCard(cardEl, symbol, index) {
+        if (isSolved || cardEl.classList.contains('flipped') || cardEl.classList.contains('matched') || flippedCards.length >= 2) {
+          return;
+        }
 
-        if (selectedIdx === null) {
-          selectedIdx = clickedIdx;
-          renderGrid();
-        } else if (selectedIdx === clickedIdx) {
-          selectedIdx = null;
-          renderGrid();
-        } else {
-          // Swap tiles
-          const temp = tileOrder[selectedIdx];
-          tileOrder[selectedIdx] = tileOrder[clickedIdx];
-          tileOrder[clickedIdx] = temp;
-          
-          selectedIdx = null;
+        cardEl.classList.add('flipped');
+        cardEl.innerHTML = `<span class="card-front">${symbol}</span>`;
+        flippedCards.push({ cardEl, symbol, index });
+
+        if (flippedCards.length === 2) {
           moveCount++;
           const movesEl = document.getElementById('puzzle-moves');
           if (movesEl) movesEl.textContent = moveCount;
-          renderGrid();
 
-          checkSolved();
+          if (flippedCards[0].symbol === flippedCards[1].symbol) {
+            // Match found!
+            flippedCards[0].cardEl.classList.add('matched');
+            flippedCards[1].cardEl.classList.add('matched');
+            flippedCards = [];
+            matchedCount += 2;
+
+            if (matchedCount === cards.length) {
+              triggerMemorySolved();
+            }
+          } else {
+            // No match - flip back after brief delay
+            setTimeout(() => {
+              flippedCards.forEach(item => {
+                item.cardEl.classList.remove('flipped');
+                item.cardEl.innerHTML = `<span class="card-back">🎁</span>`;
+              });
+              flippedCards = [];
+            }, 750);
+          }
         }
       }
 
-      function checkSolved() {
-        const solved = tileOrder.every((val, idx) => val === idx);
-        if (solved) {
-          triggerSolved();
-        }
-      }
-
-      function triggerSolved() {
+      function triggerMemorySolved() {
         isSolved = true;
         const statusEl = document.getElementById('puzzle-status');
-        if (statusEl) statusEl.textContent = '🎉 Solved!';
-        
-        // Confetti burst
+        if (statusEl) statusEl.textContent = '🎉 Unlocked!';
+
         if (typeof startConfetti === 'function') {
           startConfetti();
         }
@@ -1561,49 +1585,17 @@
           if (puzzleControls) puzzleControls.style.display = 'none';
           if (puzzleStats) puzzleStats.style.display = 'none';
           if (solvedCard) solvedCard.classList.add('active');
-        }, 400);
+        }, 500);
       }
 
-      function shuffleGrid() {
-        isSolved = false;
-        selectedIdx = null;
-        moveCount = 0;
-        const movesEl = document.getElementById('puzzle-moves');
-        const statusEl = document.getElementById('puzzle-status');
-        const puzzleWrapper = document.getElementById('puzzle-grid-wrapper');
-        const puzzleControls = document.getElementById('puzzle-controls');
-        const puzzleStats = document.getElementById('puzzle-stats');
-        const solvedCard = document.getElementById('puzzle-solved-card');
-
-        if (movesEl) movesEl.textContent = moveCount;
-        if (statusEl) statusEl.textContent = 'Scrambled 🧩';
-        if (puzzleWrapper) puzzleWrapper.style.display = 'block';
-        if (puzzleControls) puzzleControls.style.display = 'flex';
-        if (puzzleStats) puzzleStats.style.display = 'block';
-        if (solvedCard) solvedCard.classList.remove('active');
-
-        // Scramble array ensuring it's not accidentally solved
-        do {
-          for (let i = tileOrder.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [tileOrder[i], tileOrder[j]] = [tileOrder[j], tileOrder[i]];
-          }
-        } while (tileOrder.every((val, idx) => val === idx));
-
-        renderGrid();
+      function autoUnlockMemory() {
+        triggerMemorySolved();
       }
 
-      function autoSolve() {
-        tileOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-        selectedIdx = null;
-        renderGrid();
-        triggerSolved();
-      }
+      window.shufflePuzzle = initMemoryGame;
+      window.autoSolvePuzzle = autoUnlockMemory;
 
-      window.shufflePuzzle = shuffleGrid;
-      window.autoSolvePuzzle = autoSolve;
-
-      document.addEventListener('DOMContentLoaded', shuffleGrid);
+      document.addEventListener('DOMContentLoaded', initMemoryGame);
     })();
   </script>
 </body>
