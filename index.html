@@ -284,7 +284,7 @@
     }
 
     /* ==========================================================================
-       2. HERO SECTION (SQUARE PHOTO SEPARATION, NO BACKGROUND CARD CONTAINER)
+       2. HERO SECTION (FULL UNCROPPED IMAGE IN NATURAL ASPECT RATIO)
        ========================================================================== */
     .hero-section {
       min-height: 90vh;
@@ -356,17 +356,16 @@
       width: 100%;
     }
 
-    /* Square Hero Photo Frame without Heavy Background Container */
+    /* Full Uncropped Hero Photo Container */
     .hero-photo-card {
       position: relative;
       width: 100%;
-      max-width: 440px;
-      aspect-ratio: 1 / 1;
-      border-radius: 16px;
+      max-width: 480px;
+      border-radius: 20px;
       overflow: hidden;
       border: 2px solid rgba(217, 119, 6, 0.3);
-      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1), 0 0 30px rgba(217, 119, 6, 0.12);
-      background: transparent;
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12), 0 0 30px rgba(217, 119, 6, 0.15);
+      background: #FFFFFF;
       margin: 0 auto;
       opacity: 0;
       transform: translateY(20px) scale(0.95);
@@ -380,14 +379,14 @@
 
     .hero-card-img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
+      object-fit: contain;
       transition: transform 0.6s ease;
     }
 
     .hero-photo-card:hover .hero-card-img {
-      transform: scale(1.03);
+      transform: scale(1.02);
     }
 
     .hero-badge {
@@ -904,7 +903,7 @@
        ========================================================================== -->
   <main id="main-content">
 
-    <!-- 2. HERO SECTION (SQUARE PHOTO SEPARATION, NO BACKGROUND CARD CONTAINER) -->
+    <!-- 2. HERO SECTION (FULL UNCROPPED IMAGE 20250428_193019.jpg ON RIGHT) -->
     <section class="hero-section container" id="hero">
       <div class="hero-grid">
         <!-- Left Column: Text Content -->
@@ -921,7 +920,7 @@
           </a>
         </div>
 
-        <!-- Right Column: Crisp Square Photo Frame (20250428_193019.jpg) -->
+        <!-- Right Column: Full Uncropped Image 20250428_193019.jpg -->
         <div class="hero-image-col">
           <div class="hero-photo-card" id="hero-photo-frame">
             <img src="20250428_193019.jpg" alt="Gundumani Birthday Portrait" class="hero-card-img" id="hero-img">
@@ -939,7 +938,7 @@
         
         <!-- EDITABLE: Birthday Message Paragraph -->
         <p class="message-text">
-          "Happy Birthday, Gundumani! May your day be as bright and wonderful as the warmth you bring into everyone’s lives. Thank you for being such an extraordinary person, bringing smiles, comfort, and boundless happiness wherever you go. Here’s to celebrating another year of dreams fulfilled, endless laughter, and beautiful new beginnings!"
+          "Happy Birthday, Gundumani! May your day be as bright and wonderful as the warmth you bring into everyone’s lives. Thank you for being such an extraordinary person, bringing smiles, comfort, and boundless happiness wherever you go. Here’s to celebrating another year of dreams fulfilled, endless laughter, and beautiful new beginnings! Better late than never, right? Wishing you a birthday as wonderful and one-of-a-kind as you are, Gundumani — even if I'm a few days behind."
         </p>
 
         <!-- EDITABLE: Signature Line -->
