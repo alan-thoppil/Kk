@@ -1753,15 +1753,15 @@
       typeWriterTitle(titleText, 'typewriter-title', 90);
 
       // 2. Timeline:
-      // T = 5000ms: Greeting text fades out
-      // T = 5200ms -> 7300ms: Countdown 3 -> 2 -> 1 (~700ms apart)
-      // T = 7400ms: Splash screen fades out -> CONFETTI STARTS FALLING & AUTO-STOPS AFTER 7s!
+      // T = 5000ms: Greeting text fades out (5 seconds intro delay)
+      // T = 5200ms -> 10200ms: Countdown 5 -> 4 -> 3 -> 2 -> 1 (1000ms per number = 5 seconds total)
+      // T = 10300ms: Splash screen fades out -> CONFETTI STARTS FALLING & AUTO-STOPS AFTER 7s!
 
       setTimeout(() => {
         splashGreeting.classList.add('hidden');
 
         setTimeout(() => {
-          const numbers = ['3', '2', '1'];
+          const numbers = ['5', '4', '3', '2', '1'];
           let idx = 0;
 
           splashCountdown.style.opacity = '1';
@@ -1773,7 +1773,7 @@
               void splashCountdown.offsetWidth;
               splashCountdown.classList.add('pop-in');
               idx++;
-              setTimeout(showNextNumber, 700);
+              setTimeout(showNextNumber, 1000);
             } else {
               // Step 3: Countdown Finished -> Fade out splash screen & START CONFETTI!
               splashCountdown.style.opacity = '0';
