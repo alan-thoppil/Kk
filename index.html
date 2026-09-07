@@ -284,7 +284,7 @@
     }
 
     /* ==========================================================================
-       2. HERO SECTION (HERO BACKGROUND PHOTO LAYOUT WITH GRADIENT BLEND)
+       2. HERO SECTION (BRIGHT VIVID BACKGROUND PHOTO WITH SOFT TEXT FADE)
        ========================================================================== */
     .hero-section {
       position: relative;
@@ -301,10 +301,10 @@
       top: 0;
       right: 0;
       bottom: 0;
-      width: 55%;
+      width: 60%;
       z-index: 1;
       opacity: 0;
-      transform: scale(1.05);
+      transform: scale(1.03);
       transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -319,13 +319,14 @@
       object-fit: cover;
       object-position: center top;
       display: block;
+      filter: brightness(1.05) contrast(1.04) saturate(1.05);
     }
 
-    /* Gradient overlay blending background photo seamlessly into page */
+    /* Subtle gradient fade only behind the text on left side so portrait remains bright and crisp */
     .hero-bg-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, #FAFAFC 0%, rgba(250, 250, 252, 0.95) 20%, rgba(250, 250, 252, 0.4) 65%, transparent 100%);
+      background: linear-gradient(to right, #FAFAFC 0%, rgba(250, 250, 252, 0.85) 22%, rgba(250, 250, 252, 0.12) 48%, transparent 75%);
     }
 
     .hero-container {
@@ -402,7 +403,7 @@
     @media (max-width: 868px) {
       .hero-bg-wrapper {
         width: 100%;
-        opacity: 0.3 !important;
+        opacity: 0.35 !important;
       }
       
       .hero-bg-overlay {
@@ -563,7 +564,7 @@
 
     .timeline-media-img {
       width: 100%;
-      height: 260px;
+      height: 280px;
       object-fit: cover;
       display: block;
     }
@@ -888,7 +889,7 @@
        ========================================================================== -->
   <main id="main-content">
 
-    <!-- 2. HERO SECTION (HERO BACKGROUND PHOTO LAYOUT WITH GRADIENT BLEND) -->
+    <!-- 2. HERO SECTION (HERO BACKGROUND PHOTO LAYOUT WITH BRIGHT VIVID RENDERING) -->
     <section class="hero-section" id="hero">
       <!-- Background Image Layer -->
       <div class="hero-bg-wrapper" id="hero-photo-frame">
@@ -933,7 +934,7 @@
     </section>
 
 
-    <!-- 4. TIMELINE SECTION (FEATURING MEMORY OIL PAINTING ARTWORK) -->
+    <!-- 4. TIMELINE SECTION (FEATURING CHATGPT TALKING MEMORY OIL PAINTING ARTWORK) -->
     <section class="section container" id="timeline">
       <h2 class="section-title">Memory <span>Timeline</span> ⏳</h2>
       <p class="section-subtitle">A look back at some of our favorite chapters together</p>
@@ -953,20 +954,20 @@
           </div>
         </div>
 
-        <!-- EDITABLE: Timeline Entry 2 (WITH GENERATED MEMORY OIL PAINTING) -->
+        <!-- EDITABLE: Timeline Entry 2 (WITH CHATGPT TALKING MEMORY OIL PAINTING) -->
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-card">
             <span class="timeline-badge">Chapter 02</span>
-            <h3 class="timeline-title">Endless Laughter & Memory Oil Painting ✨</h3>
+            <h3 class="timeline-title">Endless Laughter & Talking Memory Artwork ✨</h3>
             <p class="timeline-desc">
-              From impromptu conversations to unforgettable trips — a specially rendered oil painting artwork capturing our favorite memories together.
+              From impromptu conversations to unforgettable trips — a specially rendered talking oil painting artwork capturing our favorite memories together.
             </p>
 
-            <!-- AI Memory Oil Painting Artwork Card -->
-            <div class="timeline-media-card" onclick="openLightbox('timeline_oil_painting.png')">
-              <img src="timeline_oil_painting.png" alt="Memory Oil Painting Artwork" class="timeline-media-img">
-              <div class="timeline-media-badge">🎨 AI Memory Oil Painting Edition</div>
+            <!-- ChatGPT Talking Memory Oil Painting Artwork Card -->
+            <div class="timeline-media-card" onclick="openLightbox('chatgpt_oil_painting.png')">
+              <img src="chatgpt_oil_painting.png" alt="ChatGPT Talking Memory Oil Painting Artwork" class="timeline-media-img">
+              <div class="timeline-media-badge">🎨 AI Talking Memory Oil Painting</div>
             </div>
           </div>
         </div>
@@ -1005,6 +1006,13 @@
 
       <!-- Responsive Grid with Real Local Images & Artwork -->
       <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox('chatgpt_oil_painting.png')">
+          <img src="chatgpt_oil_painting.png" alt="ChatGPT Talking Memory Oil Painting" class="gallery-img" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">Talking Oil Painting 🎨</span>
+          </div>
+        </div>
+
         <div class="gallery-item" onclick="openLightbox('timeline_oil_painting.png')">
           <img src="timeline_oil_painting.png" alt="Memory Oil Painting" class="gallery-img" loading="lazy">
           <div class="gallery-overlay">
@@ -1037,13 +1045,6 @@
           <img src="IMG-20250913-WA0029.jpg" alt="Memory Snapshot 2" class="gallery-img" loading="lazy">
           <div class="gallery-overlay">
             <span class="gallery-caption">Brightest Smiles 😁</span>
-          </div>
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox('IMG-20250913-WA0031.jpg')">
-          <img src="IMG-20250913-WA0031.jpg" alt="Memory Snapshot 3" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-caption">Joyful Days 🌟</span>
           </div>
         </div>
       </div>
